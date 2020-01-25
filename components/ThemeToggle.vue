@@ -1,14 +1,24 @@
 <template lang="pug">
   span
     v-list-item.uc.nav-item
-        v-list-item-action.cursor.no-text(@click="cycleTheme()")
-            v-icon {{colorMode==='auto'?'brightness_auto':$vuetify.theme.dark?'brightness_5':'brightness_4'}}
-        v-list-item-content
-            v-list-item-title {{colorMode==='auto'?'auto':$vuetify.theme.dark?'dark':'light'}}
+      v-list-item-action.cursor(:class="{'visually-hidden':hideIcon,'no-text':hideText }" @click="cycleTheme()")
+        v-icon {{colorMode==='auto'?'brightness_auto':$vuetify.theme.dark?'brightness_5':'brightness_4'}}
+      v-list-item-content(:class="{'visually-hidden':hideText,'no-icon':hideIcon }")
+        v-list-item-title {{colorMode==='auto'?'auto':$vuetify.theme.dark?'dark':'light'}}
 </template>
 
 <script>
 export default {
+  props: {
+    hideText: {
+      type: Boolean,
+      default: null
+    },
+    hideIcon: {
+      type: Boolean,
+      default: null
+    }
+  },
   data: () => ({ colorMode: 'auto', isMini: true }),
   computed: {
     isNight: () => new Date().getHours() < 7 || new Date().getHours() > 17

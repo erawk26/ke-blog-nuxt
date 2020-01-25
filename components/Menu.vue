@@ -3,9 +3,9 @@
     v-list-item.nav-item.uc(v-for='(item, i) in menu' :key='i' :to="item.to" :href="item.href" link :nuxt="!item.external" :target="item.external?'_blank':'_self'" :title="item.title")
       //FLAT MENU HERE
       template(v-if="type=='flat'")
-        v-list-item-action(:class="{'no-text':hideText }")
+        v-list-item-action(:class="{'visually-hidden':hideIcon,'no-text':hideText }")
           v-icon {{item.icon}}
-        v-list-item-content(:class="{'visually-hidden':hideText }")
+        v-list-item-content(:class="{'visually-hidden':hideText,'no-icon':hideIcon }")
           v-list-item-title {{item.title}}
       // MOBILE VIEW HERE
       .full-width.d-flex.flex-column.align-center(v-else-if="type == 'mobile'" active='')
@@ -39,13 +39,18 @@ export default {
     },
     hideText: {
       type: Boolean,
-      default: false
+      default: null
+    },
+    hideIcon: {
+      type: Boolean,
+      default: null
     },
     parentState: {
       type: Boolean,
       default: false
     }
   },
+  computed: {},
   watch: {
     // parentState: (newV, oldV) => //console.log(newV, oldV)
   }

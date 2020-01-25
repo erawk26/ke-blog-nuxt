@@ -1,17 +1,17 @@
 <template lang="pug">
   v-app
     .main-layout.css-grid-2
-      app-header
-      main.full-width.max-pg-width.row-1.row-span-1.col-full.pt-5
+      component(is="Header").row-1.row-span-1.col-full
+      main.full-width.max-pg-width.row-2.row-span-1.col-full.pt-5
         nuxt.pad-under-max
-      app-footer
+      component(is="Footer").row-3.row-span-1.col-full
 </template>
 
 <script>
-import AppHeader from '../components/Header'
-import AppFooter from '../components/Footer'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 export default {
-  components: { AppHeader, AppFooter },
+  components: { Header, Footer },
   data() {
     return {
       scrolled: 'top'
@@ -63,10 +63,9 @@ export default {
 @import '~/assets/scss/_animations.scss';
 @import '~/assets/scss/_global.scss';
 .main-layout {
-  grid-template-rows: 1fr 65px;
-
-  @media (max-width: 599px) {
-    grid-template-rows: 1fr 135px;
+  grid-template-rows: 5.5rem 1fr 5.5rem;
+  @media (max-width: $menu-bp - 1) {
+    grid-template-rows: 0px 1fr 13.5rem;
   }
   height: 100%;
 }
@@ -74,17 +73,21 @@ export default {
   $padding: 60px;
   $bp: $page-max-width + ($padding * 2);
   padding: 0;
-  @media (min-width: 600px) and (max-width: $bp - 1) {
+  @media (min-width: $menu-bp) and (max-width: $bp - 1) {
     padding-left: $padding;
     padding-right: $padding;
+  }
+  @media (min-width: $menu-bp - 1) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 .scrolled:not(.top) .navigation-drawer {
   z-index: 100;
-  top: -60px;
+  top: -6rem;
   left: 0;
   width: 100%;
-  transform: translateY(45px);
+  transform: translateY(4.5rem);
   position: fixed;
   transition: all 1s ease;
 }
