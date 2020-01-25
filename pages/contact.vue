@@ -1,6 +1,6 @@
 <template lang="pug">
-  section.home()
-    h1.uc Home component
+  section(:class="$route.name")
+    h1.uc {{$route.name}} component
 </template>
 
 <script>

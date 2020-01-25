@@ -1,0 +1,106 @@
+//------// Forms //------//
+.form-group {
+  padding: 5px;
+  min-width: 100%;
+  margin-bottom: 5px;
+}
+
+.form-group.short {
+  @media (min-width: 500px) {
+    max-width: 50%;
+    width: 50%;
+    min-width: 50%;
+  }
+}
+
+form {
+  .contact {
+    h2 {
+      margin-bottom: 5px;
+    }
+    .col {
+      margin: 0 5px 10px 0;
+    }
+  }
+  font-size: 18px;
+  @media (min-width: $bp-sm) {
+    font-size: 18px;
+  }
+  color: $blue;
+  width: 100%;
+  @include set-max-width(750px);
+  // font-weight: $bold;
+  *::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: transparent;
+    opacity: 1; /* Firefox */
+  }
+  .form-field {
+    border: 2px solid black;
+    position: relative;
+    border-radius: $br2;
+    margin-bottom: 17px;
+    transition: border-color 250ms ease-out;
+    &.invalid {
+      border-color: rgba($dk-red, 0.75);
+    }
+  }
+
+  input,
+  select,
+  textarea,
+  .form-control {
+    // box-shadow: inset 1px 1px 4px 0 #444;
+
+    color: #000;
+    background: none;
+    border: none;
+    font-weight: $regular;
+    padding: 8px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+    &[disabled] {
+      background: shade($gray, 20);
+    }
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    // box-shadow: 0 0 0 0 shade($gray, 15);
+  }
+  button[type="submit"] {
+    border: 2px solid black;
+    position: relative;
+    background: white;
+    border-radius: $br2;
+    padding: 8px;
+    display: block;
+    width: 160px;
+    text-transform: uppercase;
+    margin: 0 0 0 auto;
+  }
+  .file-btn {
+    input[type="file"] {
+      position: fixed;
+      top: -1000px;
+    }
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-block {
+    font-size: 15px;
+    @media (min-width: 500px) {
+      font-size: 20px;
+    }
+
+    &:last-child {
+      margin: 10px 5px 0;
+    }
+  }
+}

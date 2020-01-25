@@ -1,0 +1,86 @@
+//timing
+$opacity-timing: opacity 0.6s ease-in-out;
+$enter-timing: transform 0.75s ease-out;
+$leave-timing: transform 0.25s ease-in;
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.bounce-enter {
+  opacity: 0;
+}
+
+.bounce-enter-to {
+  opacity: 1;
+}
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+  transition: all 500ms ease-in-out;
+}
+
+.bounce-leave {
+}
+
+.bounce-leave-to {
+}
+
+.bounce-leave-active {
+  transition: all 0ms ease-in-out;
+}
+
+.slide-up-enter-active,
+.slide-right-enter-active,
+.slide-left-enter-active,
+.slide-down-enter-active {
+	transition: $enter-timing;
+}
+.slide-up-leave-active,
+.slide-right-leave-active,
+.slide-left-leave-active,
+.slide-down-leave-active {
+	transition: $leave-timing;
+}
+.slide-up-enter,
+.slide-down-leave-to {
+	transform: translateY(100%);
+}
+.slide-up-leave-to,
+.slide-down-enter {
+	transform: translateY(-100%);
+}
+.slide-right-enter,
+.slide-left-leave-to {
+	transform: translateX(-100%);
+}
+.slide-right-leave-to,
+.slide-left-enter {
+	transform: translateX(100%);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: $opacity-timing;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+  @include default-transition;
+}
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+  transform-origin: 50% 50%;
+}

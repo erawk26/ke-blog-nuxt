@@ -1,0 +1,439 @@
+.screen-reader,
+.visually-hidden {
+  @include visually-hidden;
+  &.focusable {
+    &:active,
+    &:focus {
+      @include visually-hidden--off;
+    }
+  }
+}
+.tooltip * {
+  border: none !important;
+}
+.add-top {
+  margin-top: 20px;
+}
+.remove-top {
+  margin-top: 0;
+  padding-top: 0;
+}
+.add-bottom {
+  margin-bottom: 20px;
+}
+.remove-bottom {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.max-pg-width {
+  @include set-max-width;
+}
+.clearfix::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.bdr {
+  border: $bdr;
+}
+
+//layout debugging (dev only)
+.ul {
+  @include marding();
+  border-bottom: 2px solid white;
+}
+
+.r45 {
+  transform: rotate(-45deg);
+}
+.bold {
+  font-weight: 700;
+}
+.full-width {
+  display: block;
+  width: 100%;
+}
+.inline {
+  display: inline-block;
+}
+
+.cursor{cursor:pointer}
+.ar {
+  width: 100%;
+  height: 0;
+  display: block;
+  padding: 0;
+  &.sixteen-nine {
+    padding-bottom: (9 / 16) * 100%;
+  }
+  &.seven-five {
+    padding-bottom: (5 / 7) * 100%;
+  }
+  &.five-seven {
+    padding-bottom: (7 / 5) * 100%;
+  }
+  &.nine-sixteen {
+    padding-bottom: (16 / 9) * 100%;
+  }
+  &.square {
+    padding-bottom: 100%;
+  }
+  @include default-transition(padding-bottom, 1s);
+}
+.video {
+  width: 100%;
+  height: 0;
+  padding: 0;
+  padding-bottom: (9 / 16) * 100%;
+  @include default-transition(padding-bottom, 1s);
+}
+.flex-spacer {
+  flex: 1;
+}
+.color {
+  &.primary {
+    color: $primary;
+  }
+  &.secondary {
+    color: $secondary;
+  }
+  &.tertiary {
+    color: $tertiary;
+  }
+  &.quadrary {
+    color: $quadrary;
+  }
+  &.quinary {
+    color: $quinary;
+  }
+  &.blk {
+    color: $black;
+  }
+  &.wht {
+    color: $white;
+  }
+  &.dk-gray {
+    color: $dk-gray;
+  }
+  &.lt-gray {
+    color: $lt-gray;
+  }
+  &.fire1 {
+    color: $fire1;
+  }
+  &.fire2 {
+    color: $fire2;
+  }
+  &.fire3 {
+    color: $fire3;
+  }
+  &.fire4 {
+    color: $fire4;
+  }
+  &.fire5 {
+    color: $fire5;
+  }
+  &.dk-green {
+    background-color: $dk-green;
+  }
+}
+.fill {
+  &.primary {
+    background-color: $primary;
+  }
+  &.secondary {
+    background-color: $secondary;
+  }
+  &.tertiary {
+    background-color: $tertiary;
+  }
+  &.quadrary {
+    background-color: $quadrary;
+  }
+  &.quinary {
+    background-color: $quinary;
+  }
+  &.blk {
+    background-color: $black;
+  }
+  &.wht {
+    background-color: $white;
+  }
+  &.fire1 {
+    background-color: $fire1;
+  }
+  &.fire2 {
+    background-color: $fire2;
+  }
+  &.fire3 {
+    background-color: $fire3;
+  }
+  &.fire4 {
+    background-color: $fire4;
+  }
+  &.fire5 {
+    background-color: $fire5;
+  }
+  &.white-gloss {
+    //http://colorzilla.com/gradient-editor/#ffffff+0,f3f3f3+50,ededed+51,ffffff+100;White+Gloss+%232
+    background-color: $white; // Old browsers
+    //@include filter-gradient(white, white, vertical); // IE6-9
+    background-image: linear-gradient(
+      to bottom,
+      white 0%,
+      $white1 50%,
+      $white2 51%,
+      white 100%
+    );
+  }
+  &.dk-gray {
+    background-color: $dk-gray;
+  }
+  &.dk-green {
+    background-color: $dk-green;
+  }
+  &.lt-gray {
+    background-color: $lt-gray;
+  }
+}
+.rel {
+  position: relative;
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.abs {
+  position: absolute;
+
+  &.right {
+    right: 0;
+  }
+
+  &.left {
+    left: 0;
+  }
+
+  &.top {
+    top: 0;
+  }
+
+  &.bottom {
+    bottom: 0;
+  }
+}
+
+.eo-flex {
+  display: flex;
+
+  &.inline {
+    display: inline-flex;
+  }
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.row {
+    flex-direction: row;
+  }
+
+  &.row-reverse {
+    flex-direction: row-reverse;
+  }
+
+  &.col {
+    flex-direction: column;
+  }
+
+  &.col-reverse {
+    flex-direction: column-reverse;
+  }
+
+  &.j-start {
+    justify-content: flex-start;
+  }
+
+  &.j-center {
+    justify-content: center;
+  }
+
+  &.j-end {
+    justify-content: flex-end;
+  }
+
+  &.j-space-b {
+    justify-content: space-between;
+  }
+
+  &.j-space-a {
+    justify-content: space-around;
+  }
+
+  &.a-start {
+    align-items: flex-start;
+  }
+
+  &.a-center {
+    align-items: center;
+  }
+
+  &.a-end {
+    align-items: flex-end;
+  }
+
+  &.a-stretch {
+    align-items: stretch;
+  }
+
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.box-shadow {
+  @include dropShadow;
+}
+
+.text-shadow {
+  @include textShadow;
+}
+
+.all-caps,
+.uc {
+  text-transform: uppercase;
+}
+
+.no-caps {
+  text-transform: none;
+}
+
+.caps {
+  text-transform: capitalize;
+}
+
+.left-text {
+  text-align: left;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.right-text {
+  text-align: right;
+}
+
+.css-grid-3 {
+  display:-ms-grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  .col-full {  
+    grid-column-start: 1;  
+    grid-column-end: span 3;
+  }
+  .col-center {  
+    grid-column-start: 2;  
+    grid-column-end: span 1;
+  }
+  .col-left {  
+    grid-column-start: 1;  
+    grid-column-end: span 1;
+  }
+  .col-right {  
+    grid-column-start: 3;  
+    grid-column-end: span 1;
+  }
+}
+.css-grid-2 {
+  display:-ms-grid;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  .col-full {
+    grid-column-start: 1;
+    grid-column-end: span 2;
+  }
+  .col-left {
+    grid-column-start: 1;
+    grid-column-end: span 1;
+  }
+  .col-right {
+    grid-column-start: 2;
+    grid-column-end: span 1;
+  }
+}
+.css-grid-2,.css-grid-3{
+  .col-1 {
+    grid-column-start: 1;
+  }
+  .col-2 {
+    grid-column-start: 2;
+  }
+  .col-3 {
+    grid-column-start: 3;
+  }
+  .col-4 {
+    grid-column-start: 4;
+  }
+  .col-span-1 {
+    grid-column-end: span 1;
+  }
+  .col-span-2 {
+    grid-column-end: span 2;
+  }
+  .col-span-3 {
+    grid-column-end: span 3;
+  }
+  .col-span-4 {
+    grid-column-end: span 4;
+  }
+  .row-1 {
+    grid-row: 1;
+  }
+  .row-2 {
+    grid-row: 2;
+  }
+  .row-3 {
+    grid-row: 3;
+  }
+  .row-4 {
+    grid-row: 4;
+  }
+  .row-5 {
+    grid-row: 5;
+  }
+  .row-6 {
+    grid-row: 6;
+  }
+  .row-7 {
+    grid-row: 7;
+  }
+  .row-8 {
+    grid-row: 8;
+  }
+  .row-9 {
+    grid-row: 9;
+  }
+  .row-span-1 {
+    grid-row-end: span 1;
+  }
+  .row-span-2 {
+    grid-row-end: span 2;
+  }
+  .row-span-3 {
+    grid-row-end: span 3;
+  }
+  .row-span-4 {
+    grid-row-end: span 4;
+  }
+}

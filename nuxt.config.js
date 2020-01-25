@@ -14,38 +14,33 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Lato|Unica+One|Material+Icons'
+      }
+    ]
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+  plugins: ['~/plugins/globalMethods.js'],
+  vuetify: {
+    customVariables: ['~/assets/scss/_variables.scss'],
+    optionsPath: '~/vuetify.options.js'
+  },
+
+  styleResources: {
+    scss: ['~/assets/scss/_init.scss'] // alternative: scss
+  },
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources'
   ],
-  /*
-   ** Nuxt.js modules
-   */
   modules: [],
-  /*
-   ** Build configuration
-   */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {}
   }
 }

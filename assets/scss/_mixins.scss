@@ -1,0 +1,325 @@
+// Helpful Mixins ///////////////
+@mixin set-max-width(
+  $max-width: $page-max-width,
+  $margin-top: 0,
+  $margin-bottom: 0
+) {
+  max-width: $max-width;
+  margin: $margin-top auto $margin-bottom;
+}
+/**
+   * Maintains aspect ratio
+   * Grabbed from: https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin
+   * @param  {[type]} $width  [description]
+   * @param  {[type]} $height [description]
+   * @return {[type]}         [description]
+   */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin default-transition(
+  $name: all,
+  $duration: $base-duration,
+  $timing: $base-timing
+) {
+  transition: $name $duration $timing;
+}
+
+/**
+   * Change the color of the svg.
+   */
+@mixin svg-colorized($svg, $color: $black) {
+  $svg-colorized: svg-color($svg, $color);
+
+  background-image: $svg-colorized;
+  background-repeat: no-repeat;
+}
+// Make an element visually hidden, but accessible to screen readers, etc.
+// @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  word-wrap: normal;
+}
+
+// Turns off the visually-hidden effect.
+@mixin visually-hidden--off {
+  position: static !important;
+  clip: auto;
+  overflow: visible;
+  height: auto;
+  width: auto;
+}
+
+// HEADINGS
+@mixin h1 {
+  font-family: $h1-family;
+  font-size: 5.5rem;
+  line-height: 6rem;
+  margin: 3rem 0 2rem;
+  // color: $base-font-color;
+  font-weight: $medium-b;
+
+  @media #{$mq-xs} {
+    font-size: $h1-size;
+    line-height: $h1-line-height;
+    margin: $h1-margin;
+    // color: $h1-color;
+    font-weight: $h1-weight;
+  }
+}
+
+@mixin h2 {
+  margin: $h2-margin;
+  // color: $h2-color;
+  font-weight: $h2-weight;
+  font-family: $h2-family;
+  font-size: $h2-size - 0.2;
+  line-height: $h2-line-height - 0.2;
+
+  @media #{$mq-xs} {
+    font-size: $h2-size;
+    line-height: $h2-line-height;
+  }
+}
+
+@mixin h3 {
+  margin: $h3-margin;
+  // color: $h3-color;
+  font-weight: $h3-weight;
+  font-family: $h3-family;
+  font-size: $h3-size - 0.2;
+  line-height: $h3-line-height - 0.2;
+
+  @media #{$mq-xs} {
+    font-size: $h3-size;
+    line-height: $h3-line-height;
+  }
+}
+
+@mixin h4 {
+  margin: $h4-margin;
+  // color: $h4-color;
+  font-weight: $h4-weight;
+  font-family: $h4-family;
+  font-size: $h4-size - 0.2;
+  line-height: $h4-line-height - 0.2;
+
+  @media #{$mq-xs} {
+    font-size: $h4-size;
+    line-height: $h4-line-height;
+  }
+}
+
+@mixin h5 {
+  margin: $h5-margin;
+  // color: $h5-color;
+  font-weight: $h5-weight;
+  font-family: $h5-family;
+  font-size: $h5-size - 0.2;
+  line-height: $h5-line-height - 0.2;
+
+  @media #{$mq-xs} {
+    font-size: $h5-size;
+    line-height: $h5-line-height;
+  }
+}
+
+@mixin h6 {
+  margin: $h6-margin;
+  // color: $h6-color;
+  font-weight: $h6-weight;
+  font-family: $h6-family;
+  font-size: $h6-size - 0.2;
+  line-height: $h6-line-height - 0.2;
+
+  @media #{$mq-xs} {
+    font-size: $h6-size;
+    line-height: $h6-line-height;
+  }
+}
+// BUTTONS ////////
+@mixin arrow-cta($color: $black, $hover: $blue) {
+  @if $color==$black {
+    @include svg-colorized($right-arrow, $blue);
+  } @else {
+    @include svg-colorized($right-arrow, $color);
+  }
+  font-size: 1.6rem;
+  padding: 0 2.5rem 0 0;
+  background-color: transparent;
+  background-size: 1.5rem 1.5rem;
+  background-repeat: no-repeat;
+  background-position: right 0.2rem center;
+  line-height: 1.875;
+  text-transform: uppercase;
+  font-weight: $bold;
+  color: $color;
+  letter-spacing: 1px;
+  border: 0;
+  @include default-transition;
+  &:hover {
+    background-color: transparent;
+    color: $hover;
+  }
+}
+
+@mixin button(
+  $text: $white,
+  $bg: $blue,
+  $hoverbg: $light-blue,
+  $hovertext: $text
+) {
+  line-height: 1;
+  background-color: $bg;
+  color: $text;
+  @include default-transition;
+  display: inline-block;
+  text-decoration: none;
+  padding: 1.25rem 1.6rem;
+  position: relative;
+  font-weight: $bold;
+  text-transform: uppercase;
+  border-radius: 0;
+  border-color: transparent;
+
+  &:hover {
+    background-color: $hoverbg;
+    color: $hovertext;
+    border-color: transparent;
+  }
+}
+
+@mixin textLink($color: $link-color-normal, $hoverColor: $link-color-active) {
+  @include default-transition;
+  color: $color;
+  border-bottom-color: $color;
+  &:visited {
+    color: $color;
+  }
+  &:hover,
+  &:focus,
+  &:active,
+  .active {
+    color: $hoverColor;
+    border-bottom-color: $hoverColor;
+  }
+}
+
+@mixin dropShadow() {
+  box-shadow: 0 0.3rem 0.6rem rgba($black, 0.53);
+}
+
+@mixin textShadow() {
+  text-shadow: 0 0.2rem 0.5rem rgba($black, 0.45);
+}
+
+@mixin marding($mg: 0, $pd: 0) {
+  //margin & padding combo
+  margin: $mg;
+  padding: $pd;
+}
+
+@mixin mobile {
+  //Media Queries
+  @media (max-width: #{$mobile-breakpoint - 1px}) {
+    @content;
+  }
+}
+
+@mixin not-mobile {
+  @media (min-width: #{$mobile-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$mobile-breakpoint}) and (max-width: #{$tablet-breakpoint - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$tablet-breakpoint}) {
+    @content;
+  }
+}
+@mixin not-desktop {
+  @media (max-width: #{$tablet-breakpoint} - 1) {
+    @content;
+  }
+}
+
+@mixin over-max-width {
+  @media (min-width: #{$bp-mw}) {
+    @content;
+  }
+}
+
+//slide up input labels
+@mixin label-slide($bg: #fff, $border-clr: #000, $px: 1px) {
+  .input-group {
+    position: relative;
+    display: block;
+    margin: 0 15px 30px 15px;
+    input,
+    select,
+    textarea {
+      border: $px solid $border-clr;
+      background: $bg !important;
+      padding: 12px;
+      width: 100%;
+      &:focus,
+      &:active {
+        outline: none;
+        border-color: $orange;
+      }
+    }
+    select option {
+      background: $bg !important;
+    }
+    label {
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+      transform-origin: 0 0;
+      transform: translateY(100%);
+      @include default-transition;
+      margin-left: 10px;
+      padding: 0 8px;
+      background: $bg;
+      color: $border-clr;
+      &.animate-label {
+        transform: translateY(-50%);
+      }
+    }
+  }
+  input[type='submit'] {
+    border: $px solid $border-clr;
+    background: none;
+    color: $border-clr;
+  }
+  * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
