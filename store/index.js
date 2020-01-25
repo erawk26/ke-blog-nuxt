@@ -46,25 +46,25 @@ export const state = () => ({
       {
         external: true,
         icon: 'mdi-linkedin-box',
-        href: 'https://www.linkedin.com/in/XXXXXXXXXXXXX',
+        href: `https://www.linkedin.com/in/${company.linkedin}`,
         title: 'LinkedIn'
       },
       {
         external: true,
-        icon: 'mdi-github-circle',
-        href: 'https://github.com/XXXXXXXXXXXXX',
-        title: 'GitHub'
+        icon: 'mdi-facebook',
+        href: `https://www.facebook.com/${company.facebook}`,
+        title: 'FaceBook'
       },
       {
         external: true,
-        icon: 'mdi-codepen',
-        href: 'https://codepen.io/XXXXXXXXXXXXX',
-        title: 'CodePen'
+        icon: 'mdi-twitter',
+        href: `https://twitter.com/${company.twitter}`,
+        title: 'Twitter'
       },
       {
         external: true,
         icon: 'mdi-instagram',
-        href: 'https://www.instagram.com/XXXXXXXXXXXXX',
+        href: `https://www.instagram.com/${company.instagram}`,
         title: 'Instagram'
       }
     ]

@@ -7,6 +7,17 @@
   max-width: $max-width;
   margin: $margin-top auto $margin-bottom;
 }
+@mixin pad-under-max(
+  $max-width: $page-max-width,
+  $padding: 60px
+) {
+  $bp: $max-width + ($padding * 2);
+  padding: 0;
+  @media (max-width: $bp - 1) {
+    padding-left: $padding;
+    padding-right: $padding;
+  }
+}
 /**
    * Maintains aspect ratio
    * Grabbed from: https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin

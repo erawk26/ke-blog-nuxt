@@ -1,10 +1,12 @@
 <template lang="pug">
   v-app
+    v-app-bar(app)
+      component(is="Header")
     .main-layout.css-grid-2
-      component(is="Header").row-1.row-span-1.col-full
-      main.full-width.max-pg-width.row-2.row-span-1.col-full.pt-5
-        nuxt.pad-under-max
-      component(is="Footer").row-3.row-span-1.col-full
+      v-content.full-width.max-pg-width.row-1.row-span-1.col-full
+        .pad-under-max
+          nuxt
+      component(is="Footer").row-2.row-span-1.col-full
 </template>
 
 <script>
@@ -38,21 +40,6 @@ export default {
       } else {
         this.scrolled = 'middle'
       }
-    },
-    debounce(func, wait, immediate) {
-      let timeout
-      return function() {
-        const context = this
-        const args = arguments
-        const later = function() {
-          timeout = null
-          if (!immediate) func.apply(context, args)
-        }
-        const callNow = immediate && !timeout
-        clearTimeout(timeout)
-        timeout = setTimeout(later, wait)
-        if (callNow) func.apply(context, args)
-      }
     }
   }
 }
@@ -63,21 +50,15 @@ export default {
 @import '~/assets/scss/_animations.scss';
 @import '~/assets/scss/_global.scss';
 .main-layout {
-  grid-template-rows: 5.5rem 1fr 5.5rem;
-  @media (max-width: $menu-bp - 1) {
-    grid-template-rows: 0px 1fr 13.5rem;
-  }
+  grid-template-rows: 1fr 5.5rem;
+  // @media (max-width: $menu-bp - 1) {
+  //   grid-template-rows: 0px 1fr 13.5rem;
+  // }
   height: 100%;
 }
 .pad-under-max {
-  $padding: 60px;
-  $bp: $page-max-width + ($padding * 2);
-  padding: 0;
-  @media (min-width: $menu-bp) and (max-width: $bp - 1) {
-    padding-left: $padding;
-    padding-right: $padding;
-  }
-  @media (min-width: $menu-bp - 1) {
+  @include pad-under-max;
+  @media (max-width: $menu-bp - 1) {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }

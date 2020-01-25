@@ -1,11 +1,10 @@
 <template lang="pug">
   .row-2.row-span-1.col-full.full-width
-    v-footer.pad-under-max(padless)
-      v-card.max-pg-width.d-flex.align-center.justify-start.flex-wrap.px-2(tile elevation="0")
-        .cell.copy
-          sub &copy; 2015 - {{ year }}. {{ companyName }}
-        .cell
-          my-menu.nav-footer.menu--footer.d-flex.justify-start(:menu="menus.footer" hide-text type="flat")
+    v-card.max-pg-width.d-flex.align-center.justify-start.flex-wrap.px-2(tile elevation="0")
+      .cell.copy
+        sub &copy; 2015 - {{ year }}. {{ companyName }}
+      .cell
+        my-menu.nav-footer.menu--footer.d-flex.justify-start(:menu="menus.footer" hide-text type="flat")
 </template>
 
 <script>

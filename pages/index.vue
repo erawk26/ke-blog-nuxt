@@ -1,6 +1,6 @@
 <template lang="pug">
   section.home()
-    h1.uc Home component
+    h1.uc Intro Page
 </template>
 
 <script>

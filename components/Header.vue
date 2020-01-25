@@ -1,8 +1,7 @@
 <template lang="pug">
-  v-header
-    my-menu.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
-      template(v-slot:extra)           
-        theme-btn(hide-text)
+  my-menu.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
+    template(v-slot:extra)           
+      theme-btn(hide-text)
 </template>
 
 <script>
