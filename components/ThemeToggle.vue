@@ -1,25 +1,21 @@
 <template lang="pug">
   span
-    v-list-item.uc.nav-item
-      v-list-item-action.cursor(:class="{'visually-hidden':hideIcon,'no-text':hideText }" @click="cycleTheme()")
-        v-icon {{colorMode==='auto'?'brightness_auto':$vuetify.theme.dark?'brightness_5':'brightness_4'}}
-      v-list-item-content(:class="{'visually-hidden':hideText,'no-icon':hideIcon }")
-        v-list-item-title {{colorMode==='auto'?'auto':$vuetify.theme.dark?'dark':'light'}}
+    v-tooltip(allow-overflow right :position-y="150" :position-x="350" v-model="showTooltip")
+      template(v-slot:activator)
+        v-btn.dark-btn(link icon @mouseenter="flashTooltip()" @click="cycleTheme()")
+          v-icon {{colorMode==='auto'?'brightness_auto':$vuetify.theme.dark?'brightness_5':'brightness_4'}}
+      span {{colorMode==='auto'?'Auto':$vuetify.theme.dark?'Dark':'Light'}} Mode
 </template>
 
 <script>
 export default {
-  props: {
-    hideText: {
-      type: Boolean,
-      default: null
-    },
-    hideIcon: {
-      type: Boolean,
-      default: null
-    }
-  },
-  data: () => ({ colorMode: 'auto', isMini: true }),
+  props: {},
+  data: () => ({
+    colorMode: 'auto',
+    isMini: true,
+    showTooltip: false,
+    timeout: null
+  }),
   computed: {
     isNight: () => new Date().getHours() < 7 || new Date().getHours() > 17
   },
@@ -34,6 +30,15 @@ export default {
       // just change from light to dark, not cycling modes in here
       this.$vuetify.theme.dark =
         !bool === undefined ? !this.$vuetify.theme.dark : bool
+      this.flashTooltip()
+    },
+    flashTooltip(time) {
+      time = time || 3000
+      this.showTooltip = true
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.showTooltip = false
+      }, time)
     },
     getNextColorMode(color) {
       // just cycle the different modes, not changing color in here
