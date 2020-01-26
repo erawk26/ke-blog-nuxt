@@ -1,7 +1,7 @@
 <template lang="pug">
   span
     v-tooltip(allow-overflow right :position-y="150" :position-x="350" v-model="showTooltip")
-      template(v-slot:activator)
+      template(#activator="showTooltip")
         v-btn.dark-btn(link icon @mouseenter="flashTooltip()" @click="cycleTheme()")
           v-icon {{colorMode==='auto'?'brightness_auto':$vuetify.theme.dark?'brightness_5':'brightness_4'}}
       span {{colorMode==='auto'?'Auto':$vuetify.theme.dark?'Dark':'Light'}} Mode
