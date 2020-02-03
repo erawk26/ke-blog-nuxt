@@ -8,8 +8,14 @@ export const state = () => ({
       {
         external: false,
         icon: 'home',
-        title: 'Intro',
+        title: 'Home',
         to: '/'
+      },
+      {
+        external: false,
+        icon: 'home',
+        title: 'News',
+        to: '/news'
       },
       {
         external: false,
@@ -20,20 +26,20 @@ export const state = () => ({
       {
         external: false,
         icon: 'home',
-        title: 'Contact',
-        to: '/contact'
+        title: 'Biography',
+        to: '/bio'
       },
       {
         external: false,
         icon: 'home',
-        title: 'About',
-        to: '/about'
+        title: 'Parners',
+        to: '/partners'
       },
       {
-        external: true,
-        icon: 'mdi-file-pdf',
-        title: 'Resume',
-        href: './XXX_Resume.pdf'
+        external: false,
+        icon: 'home',
+        title: 'Contact',
+        to: '/contact'
       }
     ],
     footer: [
@@ -43,23 +49,17 @@ export const state = () => ({
         to: '/contact',
         title: company.email
       },
-      {
-        external: true,
-        icon: 'mdi-linkedin-box',
-        href: `https://www.linkedin.com/in/${company.linkedin}`,
-        title: 'LinkedIn'
-      },
+      // {
+      //   external: true,
+      //   icon: 'mdi-linkedin-box',
+      //   href: `https://www.linkedin.com/in/${company.linkedin}`,
+      //   title: 'LinkedIn'
+      // },
       {
         external: true,
         icon: 'mdi-facebook',
         href: `https://www.facebook.com/${company.facebook}`,
         title: 'FaceBook'
-      },
-      {
-        external: true,
-        icon: 'mdi-twitter',
-        href: `https://twitter.com/${company.twitter}`,
-        title: 'Twitter'
       },
       {
         external: true,

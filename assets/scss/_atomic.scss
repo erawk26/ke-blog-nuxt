@@ -300,6 +300,9 @@
 .flex-grow {
   flex-grow: 1;
 }
+.flex-shrink {
+  flex-grow: 0;
+}
 
 .box-shadow {
   @include dropShadow;

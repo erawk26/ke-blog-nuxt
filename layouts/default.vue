@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    v-app-bar(app)
+    v-app-bar.full-width.max-pg-width(app)
       component(is="Header")
     .main-layout.css-grid-2
       v-content.full-width.max-pg-width.row-1.row-span-1.col-full
