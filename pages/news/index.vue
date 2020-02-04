@@ -2,7 +2,7 @@
   section(:class="$route.name")
     h1.uc {{$route.name}} Page
     ul
-      li(v-for="post in blogPosts")
+      li(v-for="post in newsPosts")
         nuxt-link(:to="'/news/'+post.slug")
           | {{post.title}}
 </template>
@@ -13,8 +13,8 @@ export default {
     return {}
   },
   computed: {
-    blogPosts() {
-      return this.$store.state.blogPosts
+    newsPosts() {
+      return this.$store.state.newsPosts
     }
   }
 }

@@ -3,7 +3,6 @@ export const state = () => ({
   siteInfo: {
     company
   },
-  blogPosts: [],
   menus: {
     main: [
       {
@@ -69,7 +68,9 @@ export const state = () => ({
         title: 'Instagram'
       }
     ]
-  }
+  },
+  basicPages: [],
+  newsPosts: []
 })
 
 export const mutations = {
@@ -85,22 +86,36 @@ export const mutations = {
       to: payload.key + '/' + x.slug
     }))
   },
-  setBlogPosts(state, list) {
-    state.blogPosts = list
+  setNewsPosts(state, list) {
+    state.newsPosts = list
+  },
+  setPages(state, list) {
+    state.basicPages = list
   }
 }
 export const actions = {
   async nuxtServerInit({ commit }) {
-    const files = await require.context(
-      '~/assets/content/blog/',
+    const files1 = await require.context(
+      '~/assets/content/news/',
       false,
       /\.json$/
     )
-    const blogPosts = files.keys().map((key) => {
-      const res = files(key)
+    const newsPosts = files1.keys().map((key) => {
+      const res = files1(key)
       res.slug = key.slice(2, -5)
       return res
     })
-    await commit('setBlogPosts', blogPosts)
+    const files2 = await require.context(
+      '~/assets/content/pages/',
+      false,
+      /\.json$/
+    )
+    const basicPages = files2.keys().map((key) => {
+      const res = files2(key)
+      res.slug = key.slice(2, -5)
+      return res
+    })
+    await commit('setPages', basicPages)
+    await commit('setNewsPosts', newsPosts)
   }
 }
