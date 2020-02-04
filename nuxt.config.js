@@ -39,7 +39,22 @@ export default {
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources'
   ],
-  modules: [],
+  modules: ['@nuxtjs/markdownit'],
+  markdownit: {
+    injected: true
+  },
+  generate: {
+    routes() {
+      const fs = require('fs')
+      const path = require('path')
+      return fs.readdirSync('./assets/content/blog').map((file) => {
+        return {
+          route: `/news/${path.parse(file).name}`, // Return the slug
+          payload: require(`./assets/content/blog/${file}`)
+        }
+      })
+    }
+  },
   build: {
     extend(config, ctx) {}
   }

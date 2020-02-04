@@ -1,7 +1,7 @@
-<template>
-  <article>
-    <h1>{{ blogPost.title }}</h1>
-  </article>
+<template lang="pug">
+  article
+    h1 {{ blogPost.title }}
+    div(v-html="$md.render(blogPost.body)")
 </template>
 
 <script>
