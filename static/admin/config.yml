@@ -20,6 +20,7 @@ collections:
       - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: "page" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI
+    format: 'json'
     folder: "assets/content/pages" # The path to the folder where the documents are stored
     create: true
     slug: '{{slug}}'
