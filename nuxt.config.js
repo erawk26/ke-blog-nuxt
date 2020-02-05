@@ -47,12 +47,21 @@ export default {
     routes() {
       const fs = require('fs')
       const path = require('path')
-      return fs.readdirSync('./assets/content/news').map((file) => {
+      const newsPosts = fs.readdirSync('./assets/content/news').map((file) => {
         return {
           route: `/news/${path.parse(file).name}`, // Return the slug
           payload: require(`./assets/content/news/${file}`)
         }
       })
+      const basicPages = fs
+        .readdirSync('./assets/content/pages')
+        .map((file) => {
+          return {
+            route: `/${path.parse(file).name}`, // Return the slug
+            payload: require(`./assets/content/pages/${file}`)
+          }
+        })
+      return basicPages.concat(newsPosts)
     }
   },
   build: {

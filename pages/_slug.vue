@@ -10,7 +10,7 @@ export default {
     if (payload) {
       return payload
     } else {
-      const obj = await require('~/assets/content/pages/contact.json')
+      const obj = await require(`~/assets/content/pages/${params.slug}.json`)
       return obj
     }
   }

@@ -18,10 +18,9 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: 'pages'
-    label: 'Basic Pages'
-    format: 'json'
-    folder: 'assets/content/pages'
+  - name: "page" # Used in routes, e.g., /admin/collections/blog
+    label: "Pages" # Used in the UI
+    folder: "assets/content/pages" # The path to the folder where the documents are stored
     create: true
     slug: '{{slug}}'
     editor:
@@ -29,4 +28,5 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Featured Image', name: 'thumbnail', widget: 'image' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
