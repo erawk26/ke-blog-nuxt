@@ -28,7 +28,7 @@ collections:
       preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Menu Icon', name: 'icon', widget: 'string', required: false }
+      - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Featured Image', name: 'thumbnail', widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
