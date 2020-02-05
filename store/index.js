@@ -10,36 +10,6 @@ export const state = () => ({
         icon: 'home',
         title: 'Home',
         to: '/'
-      },
-      {
-        external: false,
-        icon: 'home',
-        title: 'News',
-        to: '/news'
-      },
-      {
-        external: false,
-        icon: 'home',
-        title: 'Services',
-        to: '/services'
-      },
-      {
-        external: false,
-        icon: 'home',
-        title: 'Biography',
-        to: '/bio'
-      },
-      {
-        external: false,
-        icon: 'home',
-        title: 'Partners',
-        to: '/partners'
-      },
-      {
-        external: false,
-        icon: 'home',
-        title: 'Contact',
-        to: '/contact'
       }
     ],
     footer: [
@@ -91,6 +61,14 @@ export const mutations = {
   },
   setPages(state, list) {
     state.basicPages = list
+    list.forEach((item) => {
+      state.menus.main.push({
+        external: false,
+        icon: item.icon || null,
+        title: item.title,
+        to: '/' + item.slug
+      })
+    })
   }
 }
 export const actions = {
