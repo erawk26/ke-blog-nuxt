@@ -1,6 +1,7 @@
 <template lang="pug">
-  section.home()
-    h1.uc Intro Page
+  article.home()
+    h1.uc {{title}}
+    div(v-html="$md.render(body)")
 </template>
 
 <script>
@@ -12,8 +13,13 @@ export default {
       ]
     }
   },
-  data() {
-    return {}
+  async asyncData({ params, payload }) {
+    if (payload) {
+      return payload
+    } else {
+      const obj = await require('~/assets/content/pages/home.json')
+      return obj
+    }
   }
 }
 </script>

@@ -1,12 +1,18 @@
 <template lang="pug">
-  section(:class="$route.name")
-    h1.uc {{$route.name}} Page
+  article(:class="$route.name")
+    h1.uc {{title}}
+    div(v-html="$md.render(body)")
 </template>
 
 <script>
 export default {
-  data() {
-    return {}
+  async asyncData({ params, payload }) {
+    if (payload) {
+      return payload
+    } else {
+      const obj = await require('~/assets/content/pages/contact.json')
+      return obj
+    }
   }
 }
 </script>

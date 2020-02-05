@@ -32,7 +32,7 @@ export const state = () => ({
       {
         external: false,
         icon: 'home',
-        title: 'Parners',
+        title: 'Partners',
         to: '/partners'
       },
       {
