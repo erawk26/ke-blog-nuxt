@@ -17,7 +17,7 @@ export default {
     if (payload) {
       return payload
     } else {
-      const obj = await require('~/assets/content/home.json')
+      const obj = await require('~/assets/content/homepage.json')
       return obj
     }
   }
