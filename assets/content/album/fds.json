@@ -2,5 +2,10 @@
   "title": "fds",
   "alt": "dsfdsf",
   "style": "dsfdfs",
-  "slideRel": "dwwd"
+  "slideRel": [
+    "dwwd2",
+    "dwwd3",
+    "dwwd",
+    "dwwd1"
+  ]
 }
