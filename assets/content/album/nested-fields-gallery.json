@@ -9,6 +9,41 @@
       "image": "/img/1200x900.png",
       "video": "Slide 1 Video URL",
       "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 2",
+      "alt": "Slide 2 Alt Text",
+      "image": "/img/1200x900.png",
+      "video": "Slide 2 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 3",
+      "alt": "Slide 3 Alt Text",
+      "image": "/img/1200x900.png",
+      "video": "Slide 3 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 4",
+      "alt": "Slide 4 Alt Text",
+      "image": "/img/1200x900.png",
+      "video": "Slide 4 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 5",
+      "alt": "Slide 5 Alt Text",
+      "image": "/img/1200x900.png",
+      "video": "Slide 5 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 6",
+      "alt": "Slide 6 Alt Text",
+      "image": "/img/1200x900.png",
+      "video": "Slide 6 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     }
   ]
 }
