@@ -43,7 +43,7 @@ collections:
       preview: true
     fields:
       - { label: 'Title', name: 'title', required: true }
-      - { label: 'Description', name: 'alt', required: false }
+      - { label: 'Description', name: 'desc', required: false }
       - { label: 'Style', name: 'style', required: false }
       - label: "Slides"
         name: "slides"
