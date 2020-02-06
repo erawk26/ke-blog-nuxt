@@ -32,19 +32,32 @@ collections:
       - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
-      - { label: 'Figure Image', name: 'figureRel', widget: "relation", collection: "figure", searchFields: ["slug","title"], valueField: "image", required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: "figure" # Used in routes, e.g., /admin/collections/blog
-    label: "Figure Image" # Used in the UI
+  - name: "slide" # Used in routes, e.g., /admin/collections/blog
+    label: "Slide" # Used in the UI
     format: 'json'
-    folder: "assets/content/figure" # The path to the folder where the documents are stored
+    folder: "assets/content/slide" # The path to the folder where the documents are stored
     create: true
     slug: '{{slug}}'
     editor:
       preview: true
     fields:
-      - { label: 'Title', name: 'title', required: false }
+      - { label: 'Title', name: 'title', required: true }
       - { label: 'Alt', name: 'alt', required: false }
-      - { label: 'Style', name: 'style', required: false }
-      - { label: 'Image', name: 'image', widget: 'image', required: true}
+      - { label: 'Image', name: 'image', widget: 'image', required: false}
+      - { label: 'Video', name: 'video', widget: 'string', required: false}
       - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
+  - name: "album" # Used in routes, e.g., /admin/collections/blog
+    label: "Album" # Used in the UI
+    format: 'json'
+    folder: "assets/content/album" # The path to the folder where the documents are stored
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', required: true }
+      - { label: 'Description', name: 'alt', required: false }
+      - { label: 'Style', name: 'style', required: false }
+      - { label: 'Slide', name: 'slideRel', widget: "relation", allow_multiple: true, collection: "slide", searchFields: ["slug","title"], valueField: "title", required: true }
+  
