@@ -43,8 +43,8 @@ collections:
     editor:
       preview: true
     fields:
-      - { label: 'Title', name: 'title', widget: 'string', required: false }
-      - { label: 'Alt', name: 'alt', widget: 'string', required: false }
-      - { label: 'Style', name: 'style', widget: 'string', required: false }
-      - { label: 'Image', name: 'image', required: false}
+      - { label: 'Title', name: 'title', required: false }
+      - { label: 'Alt', name: 'alt', required: false }
+      - { label: 'Style', name: 'style', required: false }
+      - { label: 'Image', name: 'image', widget: 'image', required: true}
       - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
