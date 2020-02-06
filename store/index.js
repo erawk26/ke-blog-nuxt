@@ -10,6 +10,12 @@ export const state = () => ({
         icon: 'home',
         title: 'Home',
         to: '/'
+      },
+      {
+        external: false,
+        icon: 'news',
+        title: 'News',
+        to: '/news'
       }
     ],
     footer: [
@@ -56,9 +62,6 @@ export const mutations = {
       to: payload.key + '/' + x.slug
     }))
   },
-  setNewsPosts(state, list) {
-    state.newsPosts = list
-  },
   setPages(state, list) {
     state.basicPages = list
     list.forEach((item) => {
@@ -69,6 +72,17 @@ export const mutations = {
         to: '/' + item.slug
       })
     })
+  },
+  setNewsPosts(state, list) {
+    const i = state.menus.main.map((x) => x.to).indexOf('/news')
+    state.newsPosts = list
+    const submenu = list.map((x) => ({
+      external: false,
+      icon: null,
+      title: x.title,
+      to: '/news/' + x.slug
+    }))
+    state.menus.main[i].submenu = submenu
   }
 }
 export const actions = {

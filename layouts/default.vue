@@ -46,9 +46,10 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/_global.scss';
+@import '~/assets/scss/_vuetify.scss';
 @import '~/assets/scss/_atomic.scss';
 @import '~/assets/scss/_animations.scss';
-@import '~/assets/scss/_global.scss';
 .main-layout {
   grid-template-rows: 1fr 5.5rem;
   // @media (max-width: $menu-bp - 1) {
