@@ -4,8 +4,8 @@
       .slide(v-for="(slide,i) in slides" v-if="active==i" :key="i")
         h3 {{ slide.title }}
         p(v-html="$md.render(slide.caption)")
-    v-btn.prev(@click="loop(-1)") prev
-    v-btn.next(@click="loop(1)") next
+    v-btn.prev.mx-2.mb-2(small @click="loop(-1)") prev
+    v-btn.next.mx-2.mb-2(small @click="loop(1)") next
 </template>
 
 <script>
