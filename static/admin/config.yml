@@ -20,7 +20,7 @@ collections:
       - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: "pages" # Used in routes, e.g., /admin/collections/blog
-    label: "Pages" # Used in the UI
+    label: "Globally Structured Pages" # Used in the UI
     format: 'json'
     folder: "assets/content/pages" # The path to the folder where the documents are stored
     create: true
@@ -46,7 +46,7 @@ collections:
             collection: "album"
             searchFields: ["title", "desc"]
             valueField: "slug"
-            displayFields: ["title"]
+            displayFields: ["title"]      
   - name: "album" # Used in routes, e.g., /admin/collections/blog
     label: "Album" # Used in the UI
     format: 'json'
@@ -68,4 +68,25 @@ collections:
           - { label: 'Image', name: 'image', widget: 'image', required: false}
           - { label: 'Video', name: 'video', widget: 'string', required: false}
           - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
+  - name: "pages2" # Used in routes, e.g., /admin/collections/blog
+    label: "Manually Structured Pages" # Used in the UI
+    format: 'json'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    files:
+      - label: "Services Page"
+        name: "services"
+        file: "assets/content/pages/services.json"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+          - label: Slider
+            name: slider
+            widget: relation
+            collection: "album"
+            searchFields: ["title", "desc"]
+            valueField: "slug"
+            displayFields: ["title"]
 
