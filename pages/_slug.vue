@@ -23,7 +23,7 @@ export default {
       const obj = await require(`~/assets/content/pages/${params.slug}.json`)
       // try {
       //   // try gathering any extra fields
-      //   const extras = await require(`~/assets/content/extra/${params.slug}.json`)
+      //   const extras = await require(`~/assets/content/page2/${params.slug}.json`)
       //   return { ...extras, ...obj }
       // } catch {
       // }

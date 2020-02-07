@@ -69,11 +69,19 @@ collections:
     files:
       - label: "Home Page"
         name: "homepage"
-        file: "assets/content/extra/homepage.json"
+        file: "assets/content/page2/homepage.json"
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
           - { label: 'Publish Date', name: 'date', widget: 'datetime' }
           - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: "Scheduling Page"
+        name: "scheduling"
+        file: "assets/content/page2/scheduling.json"
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
+          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
           - { label: 'Body', name: 'body', widget: 'markdown' }
 

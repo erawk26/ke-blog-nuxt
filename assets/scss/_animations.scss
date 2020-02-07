@@ -84,3 +84,51 @@ $leave-timing: transform 0.25s ease-in;
   opacity: 0;
   transform-origin: 50% 50%;
 }
+/* accordion fade for form elements */
+$accordion-transition-enter: max-height 600ms ease, opacity 400ms ease 0ms;
+$accordion-transition-leave: max-height 600ms ease, opacity 400ms ease 200ms;
+.accordion-fade-enter-active {
+  // first half of animation (fade-in)
+  transition: $accordion-transition-enter;
+}
+.accordion-fade-leave-active {
+  // second half of animation (fade-out)
+  transition: $accordion-transition-leave;
+}
+.accordion-fade-enter, // start the timline here
+.accordion-fade-leave-to {
+  // also finish here
+  opacity: 0;
+  max-height: 0;
+  padding: 0 !important;
+  overflow: hidden;
+}
+.accordion-fade-enter-to, // this would be the middlepoint in the timeline...
+.accordion-fade-leave {
+  //..add active styling here
+  max-height: 100vh;
+  overflow: visible;
+}
+// done styling accordion-fade animation /////
+
+/* expand spin for collapse/expand icon animation */
+$expand-spin-transition-enter: transform 250ms ease;
+$expand-spin-transition-leave: transform 250ms ease;
+.expand-spin-enter-active {
+  // first half of animation (fade-in)
+  transition: $expand-spin-transition-enter;
+}
+.expand-spin-leave-active {
+  // second half of animation (fade-out)
+  transition: $expand-spin-transition-leave;
+}
+.expand-spin-enter, // start the timline here
+.expand-spin-leave-to {// also finish here
+  transform:rotate(0deg);
+}
+.expand-spin-enter-to, // this would be the middlepoint in the timeline...
+.expand-spin-leave {
+  //..add active styling here
+  transform:rotate(180deg);
+}
+// done styling expand-spin animation /////
