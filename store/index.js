@@ -83,31 +83,36 @@ export const mutations = {
       to: '/news/' + x.slug
     }))
     state.menus.main[i].submenu = submenu
+  },
+  setAlbums(state, list) {
+    state.albums = list
   }
 }
 export const actions = {
   async nuxtServerInit({ commit }) {
+    const getFiles = (arr) =>
+      arr.keys().map((key) => {
+        const res = arr(key)
+        res.slug = key.slice(2, -5)
+        return res
+      })
     const files1 = await require.context(
-      '~/assets/content/news/',
-      false,
-      /\.json$/
-    )
-    const newsPosts = files1.keys().map((key) => {
-      const res = files1(key)
-      res.slug = key.slice(2, -5)
-      return res
-    })
-    const files2 = await require.context(
       '~/assets/content/pages/',
       false,
       /\.json$/
     )
-    const basicPages = files2.keys().map((key) => {
-      const res = files2(key)
-      res.slug = key.slice(2, -5)
-      return res
-    })
-    await commit('setPages', basicPages)
-    await commit('setNewsPosts', newsPosts)
+    const files2 = await require.context(
+      '~/assets/content/news/',
+      false,
+      /\.json$/
+    )
+    const files3 = await require.context(
+      '~/assets/content/album/',
+      false,
+      /\.json$/
+    )
+    commit('setPages', getFiles(files1))
+    commit('setNewsPosts', getFiles(files2))
+    commit('setAlbums', getFiles(files3))
   }
 }
