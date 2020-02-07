@@ -64,7 +64,7 @@ collections:
     files:
       - label: "Services Page"
         name: "services"
-        file: "assets/content/pages/services.json"
+        file: "assets/content/services.json"
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
@@ -73,7 +73,7 @@ collections:
             widget: "relation"
             collection: "album"
             searchFields: ["title", "desc"]
-            valueField: "title"
-            displayFields: ["title", "desc"]
+            valueField: "slug"
+            displayFields: ["title"]
             required: false
 
