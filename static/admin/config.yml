@@ -68,11 +68,5 @@ collections:
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
-          - label: Slider
-            name: slider
-            widget: relation
-            collection: "album"
-            searchFields: ["slug", "title", "desc"]
-            valueField: "slug"
-            required: false    
+          - {label: 'Slider', name: 'albumRel', widget: "relation", collection: "album", searchFields: ["slug","title"], valueField: "slug", required: false }
 
