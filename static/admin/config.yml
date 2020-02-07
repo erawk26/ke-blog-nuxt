@@ -72,7 +72,7 @@ collections:
             name: slider
             widget: relation
             collection: "album"
-            searchFields: ["title", "desc"]
+            searchFields: ["slug", "title", "desc"]
             valueField: "slug"
-            displayFields: ["title"]        
+            required: false    
 
