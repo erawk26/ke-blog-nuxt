@@ -8,7 +8,7 @@
       "alt": "Slide 1 Alt Text",
       "image": "/img/1200x900.png",
       "video": "Slide 1 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "##### ***Donec** sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula.* \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     },
     {
       "title": "Slide 2",
