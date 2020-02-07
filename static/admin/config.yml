@@ -57,7 +57,7 @@ collections:
   - name: "pages2" # Used in routes, e.g., /admin/collections/blog
     label: "Manually Structured Pages" # Used in the UI
     format: 'json'
-    create: true
+    create: false
     slug: '{{slug}}'
     editor:
       preview: true
@@ -68,5 +68,12 @@ collections:
         fields:
           - {label: Title, name: title, widget: string}
           - {label: Intro, name: intro, widget: markdown}
-          - {label: 'Slider', name: 'albumRel', widget: "relation", collection: "album", searchFields: ["slug","title"], valueField: "slug", required: false }
+          - label: "Slider"
+            name: "albumRel"
+            widget: "relation"
+            collection: "album"
+            searchFields: ["title", "desc"]
+            valueField: "title"
+            displayFields: ["title", "desc"]
+            required: false
 
