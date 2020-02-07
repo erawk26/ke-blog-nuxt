@@ -70,8 +70,8 @@ collections:
             widget: "relation"
             collection: "album"
             searchFields: ["title", "desc"]
-            valueField: "slug"
-            displayFields: ["title", "desc"]
+            valueField: "title"
+            displayFields: ["title"]
             required: false
       - label: "Home Page"
         name: "homepage"
