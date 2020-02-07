@@ -19,7 +19,7 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
-  - name: "page" # Used in routes, e.g., /admin/collections/blog
+  - name: "pages" # Used in routes, e.g., /admin/collections/blog
     label: "Pages" # Used in the UI
     format: 'json'
     folder: "assets/content/pages" # The path to the folder where the documents are stored
@@ -33,6 +33,20 @@ collections:
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+    files:
+      - label: "Services Page"
+        name: "services"
+        file: "assets/content/pages/services.json"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Intro, name: intro, widget: markdown}
+          - label: Slider
+            name: slider
+            widget: relation
+            collection: "album"
+            searchFields: ["title", "desc"]
+            valueField: "slug"
+            displayFields: ["title"]
   - name: "album" # Used in routes, e.g., /admin/collections/blog
     label: "Album" # Used in the UI
     format: 'json'
