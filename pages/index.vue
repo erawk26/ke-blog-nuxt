@@ -23,7 +23,7 @@ export default {
     if (payload) {
       return payload
     } else {
-      const obj = await require('~/assets/content/extra/homepage.json')
+      const obj = await require('~/assets/content/page2/homepage.json')
       // obj.slideData = await require('~/assets/content/album/nested-fields-gallery.json')
       return obj
     }

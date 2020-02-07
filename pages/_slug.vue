@@ -6,6 +6,15 @@
 
 <script>
 export default {
+  computed: {
+    sliderData() {
+      const albums = this.$store.state.albums
+      const keys = albums.map((a) => a.title)
+      return keys.includes(this.albumRel)
+        ? albums[keys.indexOf(this.albumRel)]
+        : null
+    }
+  },
   async asyncData({ params, payload }) {
     if (payload) {
       return payload
