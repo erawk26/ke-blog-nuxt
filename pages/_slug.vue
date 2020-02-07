@@ -21,13 +21,12 @@ export default {
     } else {
       // get the global CMS fields
       const obj = await require(`~/assets/content/pages/${params.slug}.json`)
-      try {
-        // try gathering any extra fields
-        const extras = await require(`~/assets/content/extra/${params.slug}.json`)
-        return { ...extras, ...obj }
-      } catch {
-        // console.log('no file')
-      }
+      // try {
+      //   // try gathering any extra fields
+      //   const extras = await require(`~/assets/content/extra/${params.slug}.json`)
+      //   return { ...extras, ...obj }
+      // } catch {
+      // }
       return obj
     }
   }
