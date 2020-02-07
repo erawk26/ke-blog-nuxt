@@ -54,26 +54,32 @@ collections:
           - { label: 'Image', name: 'image', widget: 'image', required: false}
           - { label: 'Video', name: 'video', widget: 'string', required: false}
           - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
-  - name: "pages2" # Used in routes, e.g., /admin/collections/blog
-    label: "Manually Structured Pages" # Used in the UI
+  - name: "extra" # Used in routes, e.g., /admin/collections/blog
+    label: "Page Add Ons" # Used in the UI
     format: 'json'
     create: false
     slug: '{{slug}}'
-    editor:
-      preview: true
     files:
       - label: "Services Page"
         name: "services"
-        file: "assets/content/services.json"
+        file: "assets/content/extra/services.json"
         fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Intro, name: intro, widget: markdown}
+          - { label: Title, name: title, widget: string}
           - label: "Slider"
             name: "albumRel"
             widget: "relation"
             collection: "album"
             searchFields: ["title", "desc"]
-            valueField: "slug"
-            displayFields: ["title"]
+            valueField: "title"
+            displayFields: ["title", "desc"]
             required: false
+      - label: "Home Page"
+        name: "homepage"
+        file: "assets/content/extra/homepage.json"
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
+          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
+          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+          - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
 
