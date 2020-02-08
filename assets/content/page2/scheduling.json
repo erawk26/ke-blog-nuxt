@@ -1,5 +1,6 @@
 {
   "title": "Scheduling",
+  "body": "Please enter your available dates for next week.",
   "length": 7,
-  "body": "Please enter your available dates for next week."
+  "start-day": 1
 }
