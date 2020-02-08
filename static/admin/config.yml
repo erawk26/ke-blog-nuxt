@@ -30,7 +30,6 @@ collections:
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
       - label: "Album"
         name: "albumRel"
@@ -72,8 +71,6 @@ collections:
         file: "assets/content/page2/homepage.json"
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
           - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
           - { label: 'Body', name: 'body', widget: 'markdown' }
       - label: "Scheduling Page"
@@ -82,9 +79,7 @@ collections:
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Body', name: 'body', widget: 'markdown' }
-          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
           - { label: 'Days to Schedule', name: 'length', widget: 'number' }
-          - { label: 'Scheduling Start Date', name: 'startdate', widget: 'datetime' }
           - label: "Scheduling Start Date"
             name: "start-day"
             widget: "select"
