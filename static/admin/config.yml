@@ -79,9 +79,9 @@ collections:
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Body', name: 'body', widget: 'markdown' }
-          - { label: 'Days to Schedule', name: 'length', widget: 'number' }
+          - { label: 'Days to Schedule', name: 'numOfDays', widget: 'number' }
           - label: "Scheduling Start Date"
-            name: "start-day"
+            name: "startDay"
             widget: "select"
             options:
               - { label: "Monday", value: 1 }
