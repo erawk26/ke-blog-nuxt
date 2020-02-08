@@ -90,7 +90,7 @@ export default {
     }
   },
   mounted() {
-    this.$refs.calendar.scrollToTime('08:00')
+    // this.$refs.calendar.scrollToTime('08:00')
     if (localStorage.formInfo) {
       const formData = JSON.parse(localStorage.formInfo)
       this.firstName = formData.firstName
