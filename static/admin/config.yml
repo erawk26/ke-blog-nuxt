@@ -81,8 +81,19 @@ collections:
         file: "assets/content/page2/scheduling.json"
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
-          - { label: 'Scheduling Start Date', name: 'startdate', widget: 'datetime' }
-          - { label: 'Days to Schedule', name: 'length', widget: 'number' }
           - { label: 'Body', name: 'body', widget: 'markdown' }
+          - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
+          - { label: 'Days to Schedule', name: 'length', widget: 'number' }
+          - { label: 'Scheduling Start Date', name: 'startdate', widget: 'datetime' }
+          - label: "Scheduling Start Date"
+            name: "start-day"
+            widget: "select"
+            options:
+              - { label: "Monday", value: 1 }
+              - { label: "Tuesday", value: 2 }
+              - { label: "Wednesday", value: 3 }
+              - { label: "Thursday", value: 4 }
+              - { label: "Friday", value: 5 }
+              - { label: "Saturday", value: 6 }
+              - { label: "Sunday", value: 7 }
 
