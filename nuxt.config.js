@@ -25,7 +25,10 @@ export default {
   },
   loading: { color: '#fff' },
   css: [],
-  plugins: ['~/plugins/globalMethods.js'],
+  plugins: [
+    '~/plugins/globalMethods.js',
+    { src: '~/plugins/vueCarousel.js', ssr: false }
+  ],
   vuetify: {
     customVariables: ['~/assets/scss/_variables.scss'],
     optionsPath: '~/vuetify.options.js'
