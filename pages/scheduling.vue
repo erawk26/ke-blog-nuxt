@@ -2,7 +2,7 @@
   article.scheduling()
     h1.uc {{title}}
     div(v-html="$md.render(body)")
-    v-form(ref='availability' netlify)
+    v-form(ref='availability')
       transition-group(name="accordion-fade")
         //- v-calendar(ref="calendar" :now="today" :min="today" :max="tenDays" v-show="datesArr.length" :value="today" key="calendar" :events="datesArr" color="primary" type="month")
         .eo-flex.center(v-if="!loading" key="clientInfo")
