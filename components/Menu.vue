@@ -56,7 +56,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .v-list-item__action.no-text {
   margin-left: 0;
   margin-right: 0;
@@ -66,5 +66,32 @@ export default {
 .v-list-item.nav-item .v-list-item__title {
   line-height: 1;
   font-size: 1.8rem;
+}
+.underline.v-list {
+  .v-list-item {
+    //normal state
+    &::before {
+      width: calc(100% - 10px);
+      margin: auto;
+      background: none;
+      transform: translateY(2rem);
+      opacity: 0;
+    }
+  }
+  .v-list-item--active,
+  .v-list-item:hover {
+    //hover or active
+    &::before {
+      transform: translateY(0);
+      .theme--dark & {
+        border-bottom: 1px solid $theme--dark-link;
+      }
+      .theme--light & {
+        border-bottom: 1px solid $theme--light-link;
+      }
+      background: none;
+      opacity: 1;
+    }
+  }
 }
 </style>
