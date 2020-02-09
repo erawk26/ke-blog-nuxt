@@ -22,7 +22,7 @@
               v-text-field.ml-3(v-model='apptEnd' label='End of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
             v-time-picker(v-if='endMenu' v-model="apptEnd" :min="apptStart" full-width='' @click:minute='checkAppt("end")' ampm-in-title format="24hr" :allowed-hours="allowedHours" :allowed-minutes="allowedMinutes")
         v-combobox(outlined deletable-chips v-model="datesArr" key="schedulepicker" v-if="datesArr.length" :items="datesArr" item-text="name" label="Your Availabilty" multiple chips)
-        v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="body" required)
+        v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
         .eo-flex.center(v-if="canSubmit" key="formBtns")
           v-btn.mr-4.bold(outlined color='success' @click='submitForm')
             | Send
@@ -99,12 +99,10 @@ export default {
       const formData = JSON.parse(localStorage.formInfo)
       this.firstName = formData.firstName
       this.lastName = formData.lastName
-      // TODO try to convert users past dates to this current week
-      // this.datesArr = formData.datesArr
+      this.comments = formData.comments
+      this.datesArr = this.getNewDates(formData.datesArr)
     }
-    setTimeout(() => {
-      this.loading = false
-    }, 2000)
+    this.loading = false
   },
   methods: {
     checkAppt(evt) {
@@ -121,6 +119,7 @@ export default {
             new Date(start),
             new Date(end)
           )}`,
+          day: getISODay(new Date(start)),
           start: D + ' ' + tS,
           end: D + ' ' + tE
         })
@@ -133,17 +132,39 @@ export default {
         }, 1000)
       }
     },
+    getNewDates(arr) {
+      const startDay = getISODay(new Date(this.calStart + 'T00:00')) // get the day
+      // iterate over array
+      return arr.map((item) => {
+        const diff =
+          startDay === item.day
+            ? 0
+            : startDay < item.day
+            ? item.day - startDay
+            : 7 + item.day - startDay
+        const newDay = format(
+          addDays(new Date(this.calStart + 'T00:00'), diff),
+          'yyyy-MM-dd'
+        )
+        const start = newDay + ' ' + item.start.split(' ')[1]
+        const end = newDay + ' ' + item.end.split(' ')[1]
+        return {
+          name: item.name,
+          day: item.day,
+          start,
+          end
+        }
+      })
+    },
     dateAdded(newVal) {
-      // this.datesArr.push(newVal)
-
-      // eslint-disable-next-line no-console
-      console.log(newVal)
+      // console.log(newVal)
     },
     submitForm() {
       const obj = {
         firstName: this.firstName,
         lastName: this.lastName,
-        datesArr: this.datesArr
+        datesArr: this.datesArr,
+        comments: this.comments
       }
       localStorage.setItem('formInfo', JSON.stringify(obj))
     },

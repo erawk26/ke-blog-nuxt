@@ -43,6 +43,7 @@ header {
   }
   .site-logo {
     width: 95px;
+    min-width: 95px;
     svg {
       // height: 100%;
       // display: block;
