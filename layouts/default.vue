@@ -7,7 +7,7 @@
       min-height="75"
       app)
       component(is="Header")
-      v-app-bar-nav-icon(v-if="$vuetify.breakpoint.smAndDown")
+      v-app-bar-nav-icon(v-show="$vuetify.breakpoint.smAndDown")
     v-content.main-layout.full-width.max-pg-width.row-1.row-span-1.col-full
       .pad-under-max
          nuxt
