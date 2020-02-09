@@ -1,29 +1,20 @@
 <template lang="pug">
   .header-wrapper.eo-flex.a-stretch.full-width.max-pg-width
-    .cell.site-logo.eo-flex.center
+    nuxt-link.cell.site-logo.eo-flex.center(to="/" title="Home")
       logo
     v-spacer
     .cell.eo-flex.a-center.j-end.desktop-only
-      my-menu.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
-      //v-menu(bottom left)
-        template(v-slot:activator='{ on }')
-          v-btn(icon v-on='on')
-            v-icon mdi-dots-vertical
-        v-list
-          v-list-item
-            v-list-item-title link 1
-          v-list-item
-            v-list-item-title link 2
-          v-list-item
-            v-list-item-title link 3
+      my-menu.underline.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
+      dot-menu
 </template>
 
 <script>
 import Logo from '~/components/Logo'
 import MyMenu from '~/components/Menu'
+import DotMenu from '~/components/DotMenu'
 export default {
   name: 'AppHeader',
-  components: { MyMenu, Logo },
+  components: { DotMenu, MyMenu, Logo },
   data: () => ({ loading: true, isMini: true }),
   computed: {},
   watch: {
