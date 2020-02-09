@@ -1,7 +1,8 @@
 <template lang="pug">
-  article(:class="$route.name")
-    h1.uc {{title}}
-    div(v-html="$md.render(body)")
+  article.page(:class="$route.name")
+    section.body.pa-5.max-pg-width
+      h1.uc {{title}}
+      div(v-html="$md.render(body)")
 </template>
 
 <script>

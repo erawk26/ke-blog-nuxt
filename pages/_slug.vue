@@ -1,7 +1,13 @@
 <template lang="pug">
-  article(:class="$route.name")
-    h1.uc {{title}}
-    div(v-html="$md.render(body)")
+  article.page(:class="$route.name")
+    section.hero
+      album.rel(v-if="sliderData" type="carousel" :slides="sliderData.slides" :title="sliderData.title")
+    section.body.pa-5.max-pg-width
+      h1.uc {{title}}
+      div(v-html="$md.render(body)")
+    section.post-body-components
+      | Page components will go here
+    
 </template>
 
 <script>
