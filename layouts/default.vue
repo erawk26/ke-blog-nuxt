@@ -1,12 +1,17 @@
 <template lang="pug">
   v-app
-    v-app-bar.full-width.max-pg-width(app)
+    v-app-bar.full-width(
+      shrink-on-scroll
+      prominent
+      scroll-threshold="200"
+      min-height="75"
+      app)
       component(is="Header")
-    .main-layout.css-grid-2
-      v-content.full-width.max-pg-width.row-1.row-span-1.col-full
-        .pad-under-max
-          nuxt
-      component(is="Footer").row-2.row-span-1.col-full
+      v-app-bar-nav-icon(v-if="$vuetify.breakpoint.smAndDown")
+    v-content.main-layout.full-width.max-pg-width.row-1.row-span-1.col-full
+      .pad-under-max
+         nuxt
+    component(is="Footer").row-2.row-span-1.col-full
 </template>
 
 <script>
@@ -51,11 +56,19 @@ export default {
 @import '~/assets/scss/_atomic.scss';
 @import '~/assets/scss/_animations.scss';
 .main-layout {
-  grid-template-rows: 1fr 5.5rem;
+  // grid-template-rows: 1fr 5.5rem;
   // @media (max-width: $menu-bp - 1) {
   //   grid-template-rows: 0px 1fr 13.5rem;
   // }
-  height: 100%;
+}
+.v-app-bar {
+  .v-toolbar__content {
+    width: 100%;
+    display: flex;
+    justify: space-between;
+    align-items: center;
+    @extend .abs-center;
+  }
 }
 .pad-under-max {
   @include pad-under-max;
