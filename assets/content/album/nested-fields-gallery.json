@@ -6,7 +6,7 @@
     {
       "title": "Slide 1",
       "alt": "Slide 1 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
       "video": "Slide 1 Video URL",
       "caption": "##### ***Donec** sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula.* \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     },
@@ -20,7 +20,7 @@
     {
       "title": "Slide 3",
       "alt": "Slide 3 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
       "video": "Slide 3 Video URL",
       "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     },
@@ -34,7 +34,7 @@
     {
       "title": "Slide 4",
       "alt": "Slide 4 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
       "video": "Slide 4 Video URL",
       "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     },
@@ -43,6 +43,13 @@
       "alt": "Slide 6 Alt Text",
       "image": "/img/1200x900.png",
       "video": "Slide 6 Video URL",
+      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+    },
+    {
+      "title": "Slide 7",
+      "alt": "Slide 7 Alt Text",
+      "image": "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+      "video": "Slide 7 Video URL",
       "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
     }
   ]
