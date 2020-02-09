@@ -8,6 +8,12 @@
     }
   }
 }
+.mobile-only{display: none;}
+.desktop-only{display: initial;}
+@media (max-width:767px){
+  .mobile-only{display: initial;}
+  .desktop-only{display: none!important;}
+}
 .tooltip * {
   border: none !important;
 }

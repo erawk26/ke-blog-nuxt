@@ -2,7 +2,8 @@
   .header-wrapper.eo-flex.a-stretch.full-width.max-pg-width
     .cell.site-logo.eo-flex.center
       logo
-    .cell.eo-flex.a-center.j-end.flex-grow.desktop(v-show="!$vuetify.breakpoint.mdAndDown")
+    v-spacer
+    .cell.eo-flex.a-center.j-end.desktop-only
       my-menu.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
       //v-menu(bottom left)
         template(v-slot:activator='{ on }')
