@@ -8,9 +8,9 @@
       app)
       component(is="Header")
       v-app-bar-nav-icon.mobile-only
-    v-content.main-layout.full-width.max-pg-width.row-1.row-span-1.col-full
-      .pad-under-max
-         nuxt
+    v-content.main-layout.full-width.row-1.row-span-1.col-full
+      v-container.px-5.max-pg-width
+        nuxt
     component(is="Footer").row-2.row-span-1.col-full
 </template>
 
