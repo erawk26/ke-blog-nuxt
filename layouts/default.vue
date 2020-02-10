@@ -1,5 +1,9 @@
 <template lang="pug">
   v-app
+    v-navigation-drawer(v-model="drawer" disable-resize-watcher app right close-on-click)
+      my-menu.nav-main.menu--main(type="dropdown" :menu="$store.state.menus.main" hide-icon)
+        template(slot:extra)
+          dot-menu
     v-app-bar.full-width(
       shrink-on-scroll
       prominent
@@ -7,7 +11,7 @@
       min-height="75"
       app)
       component(is="Header")
-      v-app-bar-nav-icon.mobile-only
+      v-app-bar-nav-icon.mobile-only(@click="drawer=!drawer")
     v-content.main-layout.full-width.row-1.row-span-1.col-full
       nuxt
     component(is="Footer").row-2.row-span-1.col-full
@@ -16,10 +20,13 @@
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import MyMenu from '~/components/Menu'
+import DotMenu from '~/components/DotMenu'
 export default {
-  components: { Header, Footer },
+  components: { DotMenu, MyMenu, Header, Footer },
   data() {
     return {
+      drawer: false,
       scrolled: 'top'
     }
   },

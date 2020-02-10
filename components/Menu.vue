@@ -12,7 +12,7 @@
         v-icon.d-block {{item.icon}}
         span {{item.title}}
       // DROPDOWN MENU HERE  
-      v-list-group.flex-grow-1(v-else :prepend-icon="item.icon" :append-icon="!item.submenu?'':'expand_more'")
+      v-list-group.flex-grow-1(v-else :prepend-icon="hideIcon?'':item.icon" :append-icon="!item.submenu?'':'expand_more'")
         template(v-slot:activator)
           v-list-item-content()
             v-list-item-title() {{item.title}}
