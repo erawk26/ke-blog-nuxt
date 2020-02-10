@@ -60,6 +60,65 @@ collections:
           - { label: 'Image', name: 'image', widget: 'image', required: false}
           - { label: 'Video', name: 'video', widget: 'string', required: false}
           - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
+  - name: "menu-order" # this will replace "album"
+    label: "Menu Order"
+    format: 'json'
+    folder: "assets/content/menu-order"
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Title', name: 'title', required: true }
+      - { label: 'Description', name: 'desc', required: false }
+      - { label: 'Style', name: 'style', widget: list, required: false }
+      - label: "Media"
+        name: "media"
+        widget: "list"
+        collection: "album"
+        searchFields: ["title", "desc", "slug"]
+        valueField: "slug"
+        displayFields: ["title"]
+        required: true
+  - name: "albums" # this will replace "album"
+    label: "Albums"
+    format: 'json'
+    folder: "assets/content/albums"
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Title', name: 'title', required: true }
+      - { label: 'Description', name: 'desc', required: false }
+      - { label: 'Style', name: 'style', widget: list, required: false }
+      - label: "Media"
+        name: "media"
+        widget: "list"
+        collection: "album"
+        searchFields: ["title", "desc", "slug"]
+        valueField: "slug"
+        displayFields: ["title"]
+        required: true
+  - name: "media" # this will be used in albums
+    label: "media" # Used in the UI
+    format: 'json'
+    folder: "assets/content/media" # The path to the folder where the documents are stored
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        multiple: true
+        fields:
+          - { label: 'Title', name: 'title', required: true }
+          - { label: 'Alt', name: 'alt', required: false }
+          - { label: 'Image', name: 'image', widget: 'image', required: false}
+          - { label: 'Video', name: 'video', widget: 'string', required: false}
+          - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
   - name: "page2" # Used in routes, e.g., /admin/collections/blog
     label: "Single Use Data Stuctures" # Used in the UI
     format: 'json'
@@ -73,6 +132,20 @@ collections:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
           - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: "Menu Order"
+        name: "menu-order"
+        file: "assets/content/page2/menuOrder.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Order"
+            name: "order"
+            widget: "list"
+            collection: "page"
+            searchFields: ["title", "slug"]
+            valueField: "title"
+            displayFields: ["title"]
+            required: true
       - label: "Scheduling Page"
         name: "scheduling"
         file: "assets/content/page2/scheduling.json"
