@@ -16,18 +16,18 @@
             template(v-slot:activator='{ on }')
               v-text-field(outlined v-model='apptDay' label='Day of Availability' append-icon='event' readonly v-on='on')
             v-date-picker(v-model='apptDay' :min="calStart" :max="scheduleLength" @input='dateAdded')
-          .eo-flex.center(v-if="apptDay" key="timepicker")
+          .eo-flex.two-cols.a-start(v-if="apptDay" key="timepicker")
             v-menu(ref='startMenu' v-model='startMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptStart' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
               template(v-slot:activator='{ on }')
                 v-text-field.mr-3(v-model='apptStart' label='Start of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
-              v-time-picker(v-if='startMenu' v-model="apptStart" :max="apptEnd" full-width='' @click:minute='checkAppt("start")' ampm-in-title format="24hr" :allowed-hours="allowedHours" :allowed-minutes="allowedMinutes")
-            v-menu(ref='endMenu' v-model='endMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptEnd' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
+              v-time-picker(v-if='startMenu' v-model="apptStart" :min="workDay.start" :max="apptEnd||workDay.end" full-width='' @click:minute='checkAppt("start")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
+            v-menu(ref='endMenu' v-if='apptStart' v-model='endMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptEnd' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
               template(v-slot:activator='{ on }')
                 v-text-field.ml-3(required v-model='apptEnd' label='End of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
-              v-time-picker(v-if='endMenu' v-model="apptEnd" :min="apptStart" full-width='' @click:minute='checkAppt("end")' ampm-in-title format="24hr" :allowed-hours="allowedHours" :allowed-minutes="allowedMinutes")
+              v-time-picker(v-model="apptEnd" :min="addMinutes(apptDay,apptStart,44)" :max="workDay.end" full-width='' @click:minute='checkAppt("end")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
           v-combobox(outlined deletable-chips v-model="datesArr" key="schedulepicker" v-if="datesArr.length" :items="datesArr" item-text="name" label="Your Availabilty" multiple chips)
           v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
-          .eo-flex.center(v-if="canSubmit" key="formBtns")
+          .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
             v-btn.mr-4.bold(outlined color='success' @click='submitForm')
               | Send
             v-btn.mr-4.bold(outlined color='error' @click='reset')
@@ -42,13 +42,14 @@
 /* eslint-disable no-console */
 import {
   getISODay,
-  formatDistance,
+  getTime,
+  addMinutes,
   parseISO,
   subDays,
   addDays,
   format
 } from 'date-fns'
-import { emailRules, nameRules, dateRules } from '~/assets/js/formRules'
+import { emailRules, nameRules } from '~/assets/js/formRules'
 export default {
   components: {},
   data() {
@@ -61,19 +62,20 @@ export default {
       datepickerIsOpen: false,
       startMenu: false,
       endMenu: false,
-      allowedHours: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
       allowedMinutes: [0, 15, 30, 45],
       apptDay: null,
       apptStart: null,
       apptEnd: null,
       today: format(new Date(), 'yyyy-MM-dd'),
-      dates: '',
       datesArr: [],
       comments: '',
       errorMsg: null,
+      workDay: {
+        start: '07:00',
+        end: '19:00'
+      },
       emailRules,
-      nameRules,
-      dateRules
+      nameRules
     }
   },
   computed: {
@@ -118,6 +120,8 @@ export default {
     this.loading = false
   },
   methods: {
+    addMinutes: (day, time, n) =>
+      format(addMinutes(parseISO(day + 'T' + time), n), 'HH:mm'),
     checkAppt() {
       const D = this.apptDay
       const tS = this.apptStart
@@ -168,7 +172,9 @@ export default {
         iso: format(start, 'P'), // Locale formatted iso for label
         t1: format(start, 'p'), // formatted only for name label // 'h:maaaaa'<-shorter abbbrev
         t2: format(end, 'p'), // formatted for the name label
-        duration: formatDistance(new Date(start), new Date(end))
+        duration:
+          (getTime(new Date(end)) - getTime(new Date(start))) / 3600000 +
+          ' hours'
       }
       return {
         name: `${obj.doW} ${obj.iso}: ${obj.t1} - ${obj.t2} (${obj.duration})`,
