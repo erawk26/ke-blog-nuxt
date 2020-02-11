@@ -74,7 +74,7 @@ collections:
       - { label: 'Style', name: 'style', required: false }
       - label: "Media"
         name: "media"
-        widget: "list"
+        widget: "relation"
         multiple: true
         collection: "album"
         searchFields: ["title", "desc", "slug"]
@@ -118,12 +118,12 @@ collections:
             name: "order"
             widget: "list"
             fields:
-              - label: "Items"
-                name: "items"
-                multiple: false
+              - label: "Menu Item"
+                name: "item"
+                widget: "relation"
                 collection: "page"
                 searchFields: ["title", "slug"]
-                valueField: "title"
+                valueField: "slug"
                 displayFields: ["title"]
                 required: true
       - label: "Scheduling Page"
