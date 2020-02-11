@@ -44,6 +44,9 @@
   border: $bdr;
 }
 
+.z-index-10 {
+  z-index: 10;
+}
 //layout debugging (dev only)
 .ul {
   @include marding();

@@ -67,6 +67,9 @@ export default {
   line-height: 1;
   font-size: 1.8rem;
 }
+.v-navigation-drawer a.nav-item {
+  padding: 0;
+}
 .underline.v-list {
   .v-list-item {
     //normal state

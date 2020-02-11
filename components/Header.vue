@@ -4,7 +4,7 @@
       logo
     v-spacer
     .cell.eo-flex.a-center.j-end.desktop-only
-      my-menu.underline.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main" hide-icon :parentState="isMini")
+      my-menu.underline.nav-main.menu--main.eo-flex.j-start(type="flat" :menu="$store.state.menus.main.slice(1)" hide-icon :parentState="isMini")
         template(v-slot:extra)
           dot-menu
 </template>

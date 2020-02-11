@@ -5,12 +5,12 @@ export const state = () => ({
   },
   menus: {
     main: [
-      // {
-      //   external: false,
-      //   icon: 'home',
-      //   title: 'Home',
-      //   to: '/'
-      // },
+      {
+        external: false,
+        icon: 'home',
+        title: 'Home',
+        to: '/'
+      },
       {
         external: false,
         icon: 'news',

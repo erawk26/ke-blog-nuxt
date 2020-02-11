@@ -1,9 +1,9 @@
 <template lang="pug">
   v-app
     v-navigation-drawer(v-model="drawer" disable-resize-watcher app right close-on-click)
+      .z-index-10.abs.top.right.mt-2.px-4.flex-grow-1.j-end
+        dot-menu
       my-menu.nav-main.menu--main(type="dropdown" :menu="$store.state.menus.main" hide-icon)
-        template(slot:extra)
-          dot-menu
     v-app-bar.full-width(
       shrink-on-scroll
       prominent
