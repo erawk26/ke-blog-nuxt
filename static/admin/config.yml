@@ -76,7 +76,7 @@ collections:
         name: "media"
         widget: "relation"
         multiple: true
-        collection: "album"
+        collection: "media"
         searchFields: ["title", "desc", "slug"]
         valueField: "title"
         displayFields: ["title"]
