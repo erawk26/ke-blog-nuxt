@@ -110,7 +110,7 @@ collections:
           - { label: 'Body', name: 'body', widget: 'markdown' }
       - label: "Menu Order"
         name: "menuorder"
-        file: "assets/content/page2/menuorder.json"
+        file: "assets/content/page2/menuOrder.json"
         editor:
           preview: false
         fields:
