@@ -60,26 +60,6 @@ collections:
           - { label: 'Image', name: 'image', widget: 'image', required: false}
           - { label: 'Video', name: 'video', widget: 'string', required: false}
           - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
-  - name: "menu-order" # this will replace "album"
-    label: "Menu Order"
-    format: 'json'
-    folder: "assets/content/menu-order"
-    create: true
-    slug: '{{slug}}'
-    editor:
-      preview: false
-    fields:
-      - { label: 'Title', name: 'title', required: true }
-      - { label: 'Description', name: 'desc', required: false }
-      - { label: 'Style', name: 'style', widget: list, required: false }
-      - label: "Media"
-        name: "media"
-        widget: "list"
-        collection: "album"
-        searchFields: ["title", "desc", "slug"]
-        valueField: "slug"
-        displayFields: ["title"]
-        required: true
   - name: "albums" # this will replace "album"
     label: "Albums"
     format: 'json'
@@ -91,10 +71,11 @@ collections:
     fields:
       - { label: 'Title', name: 'title', required: true }
       - { label: 'Description', name: 'desc', required: false }
-      - { label: 'Style', name: 'style', widget: list, required: false }
+      - { label: 'Style', name: 'style', required: false }
       - label: "Media"
         name: "media"
         widget: "list"
+        multiple: true
         collection: "album"
         searchFields: ["title", "desc", "slug"]
         valueField: "slug"
@@ -112,7 +93,7 @@ collections:
       - label: "Items"
         name: "items"
         widget: "list"
-        multiple: true
+        multiple: false
         fields:
           - { label: 'Title', name: 'title', required: true }
           - { label: 'Alt', name: 'alt', required: false }
@@ -133,14 +114,15 @@ collections:
           - { label: 'Featured Image', name: 'thumbnail', allow_multiple: true, widget: 'image', required: false }
           - { label: 'Body', name: 'body', widget: 'markdown' }
       - label: "Menu Order"
-        name: "menu-order"
-        file: "assets/content/page2/menuOrder.json"
+        name: "menuorder"
+        file: "assets/content/page2/menuorder.json"
         editor:
           preview: false
         fields:
           - label: "Order"
             name: "order"
             widget: "list"
+            multiple: false
             collection: "page"
             searchFields: ["title", "slug"]
             valueField: "title"
