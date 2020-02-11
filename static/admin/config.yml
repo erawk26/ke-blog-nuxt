@@ -123,7 +123,7 @@ collections:
                 widget: "relation"
                 collection: "page"
                 searchFields: ["title", "slug"]
-                valueField: "slug"
+                valueField: "title"
                 displayFields: ["title"]
                 required: true
       - label: "Scheduling Page"
