@@ -1,0 +1,9 @@
+{
+  "title": "This is a test Album",
+  "desc": "test description here",
+  "style": "carousel",
+  "media": [
+    "Another Image Headline",
+    "Image Headline"
+  ]
+}
