@@ -78,7 +78,7 @@ collections:
         multiple: true
         collection: "album"
         searchFields: ["title", "desc", "slug"]
-        valueField: "slug"
+        valueField: "title"
         displayFields: ["title"]
         required: true
   - name: "media" # this will be used in albums
