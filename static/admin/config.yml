@@ -117,12 +117,15 @@ collections:
           - label: "Order"
             name: "order"
             widget: "list"
-            multiple: false
-            collection: "page"
-            searchFields: ["title", "slug"]
-            valueField: "title"
-            displayFields: ["title"]
-            required: true
+            fields:
+              - label: "Items"
+                name: "items"
+                multiple: false
+                collection: "page"
+                searchFields: ["title", "slug"]
+                valueField: "title"
+                displayFields: ["title"]
+                required: true
       - label: "Scheduling Page"
         name: "scheduling"
         file: "assets/content/page2/scheduling.json"
