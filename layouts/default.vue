@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Header from '~/components/Header'
+import Footer from '~/components/Footer'
 import MyMenu from '~/components/Menu'
 import DotMenu from '~/components/DotMenu'
 export default {
@@ -71,7 +71,7 @@ export default {
   .v-toolbar__content {
     width: 100%;
     display: flex;
-    justify: space-between;
+    justify-content: space-between;
     align-items: center;
     @extend .abs-center;
   }
