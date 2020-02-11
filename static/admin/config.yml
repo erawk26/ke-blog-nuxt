@@ -90,16 +90,11 @@ collections:
     editor:
       preview: false
     fields:
-      - label: "Items"
-        name: "items"
-        widget: "list"
-        multiple: false
-        fields:
-          - { label: 'Title', name: 'title', required: true }
-          - { label: 'Alt', name: 'alt', required: false }
-          - { label: 'Image', name: 'image', widget: 'image', required: false}
-          - { label: 'Video', name: 'video', widget: 'string', required: false}
-          - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
+      - { label: 'Title', name: 'title', required: true }
+      - { label: 'Alt', name: 'alt', required: false }
+      - { label: 'Image', name: 'image', widget: 'image', required: false}
+      - { label: 'Video', name: 'video', widget: 'string', required: false}
+      - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
   - name: "page2" # Used in routes, e.g., /admin/collections/blog
     label: "Single Use Data Stuctures" # Used in the UI
     format: 'json'
