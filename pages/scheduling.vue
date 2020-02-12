@@ -5,26 +5,26 @@
       div(v-html="$md.render(body)")
       v-form(ref='availability')
         transition-group(name="accordion-fade")
-          //- v-calendar(ref="calendar" :now="today" :min="today" :max="tenDays" v-show="datesArr.length" :value="today" key="calendar" :events="datesArr" color="primary" type="month")
-          .eo-flex.center(v-if="!loading" key="clientName")
-            v-text-field.mr-3(outlined v-model="firstName" label="First Name" required :rules='nameRules')
-            v-text-field.ml-3(outlined v-model="lastName" label="Last Name" required :rules='nameRules')
-          .eo-flex.center(v-if="!loading" key="clientContact")
-            v-text-field.mr-3(outlined v-model="email" label="Email" required :rules='emailRules')
-            v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
-          v-menu(v-model='datepickerIsOpen' key="datepicker" v-if="!loading" :close-on-content-click='true' transition='scale-transition' offset-y min-width='290px')
-            template(v-slot:activator='{ on }')
-              v-text-field(outlined v-model='apptDay' label='Day of Availability' append-icon='event' readonly v-on='on')
-            v-date-picker(v-model='apptDay' :min="calStart" :max="scheduleLength" @input='dateAdded')
-          .eo-flex.two-cols.a-start(v-if="apptDay" key="timepicker")
-            v-menu(ref='startMenu' v-model='startMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptStart' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
-              template(v-slot:activator='{ on }')
-                v-text-field.mr-3(v-model='apptStart' label='Start of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
-              v-time-picker(v-if='startMenu' v-model="apptStart" :min="workDay.start" :max="apptEnd||workDay.end" full-width='' @click:minute='checkAppt("start")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
-            v-menu(ref='endMenu' v-if='apptStart' v-model='endMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptEnd' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
-              template(v-slot:activator='{ on }')
-                v-text-field.ml-3(required v-model='apptEnd' label='End of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
-              v-time-picker(v-model="apptEnd" :min="addMinutes(apptDay,apptStart,44)" :max="workDay.end" full-width='' @click:minute='checkAppt("end")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
+          scheduler#scheduler(ref="calendar" :cal-start="calendar.start" :cal-end="calendar.end" :day-start="workDay.start" :day-end="workDay.end" :days="numOfDays" key="calendar")
+          //- .eo-flex.center(v-if="!loading" key="clientName")
+          //-   v-text-field.mr-3(outlined v-model="firstName" label="First Name" required :rules='nameRules')
+          //-   v-text-field.ml-3(outlined v-model="lastName" label="Last Name" required :rules='nameRules')
+          //- .eo-flex.center(v-if="!loading" key="clientContact")
+          //-   v-text-field.mr-3(outlined v-model="email" label="Email" required :rules='emailRules')
+          //-   v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
+          //- v-menu(v-model='datepickerIsOpen' key="datepicker" v-if="!loading" :close-on-content-click='true' transition='scale-transition' offset-y min-width='290px')
+          //-   template(v-slot:activator='{ on }')
+          //-     v-text-field(outlined v-model='apptDay' label='Day of Availability' append-icon='event' readonly v-on='on')
+          //-   v-date-picker(v-model='apptDay' :min="calStart" :max="scheduleEnd" @input='dateAdded')
+          //- .eo-flex.two-cols.a-start(v-if="apptDay" key="timepicker")
+          //-   v-menu(ref='startMenu' v-model='startMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptStart' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
+          //-     template(v-slot:activator='{ on }')
+          //-       v-text-field.mr-3(v-model='apptStart' label='Start of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
+          //-     v-time-picker(v-if='startMenu' v-model="apptStart" :min="workDay.start" :max="apptEnd||workDay.end" full-width='' @click:minute='checkAppt("start")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
+          //-   v-menu(ref='endMenu' v-if='apptStart' v-model='endMenu' :close-on-content-click='false' :nudge-right='40' :return-value.sync='apptEnd' transition='scale-transition' offset-y='' max-width='290px' min-width='290px')
+          //-     template(v-slot:activator='{ on }')
+          //-       v-text-field.ml-3(required v-model='apptEnd' label='End of Availability' append-icon='access_time' readonly='' v-on='on' outlined)
+          //-     v-time-picker(v-model="apptEnd" :min="addMinutes(apptDay,apptStart,44)" :max="workDay.end" full-width='' @click:minute='checkAppt("end")' ampm-in-title format="24hr" :allowed-minutes="allowedMinutes")
           v-combobox(outlined deletable-chips v-model="datesArr" key="schedulepicker" v-if="datesArr.length" :items="datesArr" item-text="name" label="Your Availabilty" multiple chips)
           v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
           .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
@@ -50,8 +50,9 @@ import {
   format
 } from 'date-fns'
 import { emailRules, nameRules } from '~/assets/js/formRules'
+import Scheduler from '~/components/Scheduler'
 export default {
-  components: {},
+  components: { Scheduler },
   data() {
     return {
       firstName: '',
@@ -74,25 +75,12 @@ export default {
         start: '07:00',
         end: '19:00'
       },
+      calendar: {},
       emailRules,
       nameRules
     }
   },
   computed: {
-    calStart() {
-      const today = getISODay(new Date())
-      const startDay = this.startDay
-      const diff = today <= startDay ? startDay - today : startDay + 7 - today
-      return diff > 4 // if still in first half of week...
-        ? format(subDays(new Date(), diff), 'yyyy-MM-dd') // ...keep using this week
-        : format(addDays(new Date(), diff), 'yyyy-MM-dd') // ...else use next week
-    },
-    scheduleLength() {
-      return format(
-        addDays(new Date(this.calStart), this.numOfDays),
-        'yyyy-MM-dd'
-      )
-    },
     canSubmit() {
       return this.firstName.length >= 2 && this.datesArr.length > 0
     }
@@ -107,6 +95,8 @@ export default {
     }
   },
   mounted() {
+    // this.calendar.start = this.calStart()
+    this.calendar = this.cal()
     // this.$refs.calendar.scrollToTime('08:00')
     if (localStorage.formInfo) {
       const formData = JSON.parse(localStorage.formInfo)
@@ -115,11 +105,22 @@ export default {
       this.comments = formData.comments
       this.phone = formData.phone
       this.email = formData.email
-      this.datesArr = this.getNewDates(formData.datesArr)
+      // this.datesArr = this.getNewDates(formData.datesArr)
     }
     this.loading = false
   },
   methods: {
+    cal() {
+      const today = getISODay(new Date())
+      const startDay = this.startDay
+      const diff = today <= startDay ? startDay - today : startDay + 7 - today
+      const start =
+        diff > 4 // if still in first half of week...
+          ? format(subDays(new Date(), diff), 'yyyy-MM-dd') // ...keep using this week
+          : format(addDays(new Date(), diff), 'yyyy-MM-dd') // ...else use next week
+      const end = format(addDays(new Date(start), this.numOfDays), 'yyyy-MM-dd')
+      return { start, end }
+    },
     addMinutes: (day, time, n) =>
       format(addMinutes(parseISO(day + 'T' + time), n), 'HH:mm'),
     checkAppt() {
