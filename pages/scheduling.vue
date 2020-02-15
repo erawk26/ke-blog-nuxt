@@ -111,14 +111,14 @@ export default {
   },
   methods: {
     cal() {
-      const today = getISODay(new Date())
-      const startDay = this.startDay
-      const diff = today <= startDay ? startDay - today : startDay + 7 - today
+      const isoToday = getISODay(new Date())
+      const isoStart = this.startDay
+      const n = this.numOfDays
       const start =
-        diff > 4 // if still in first half of week...
-          ? format(subDays(new Date(), diff), 'yyyy-MM-dd') // ...keep using this week
-          : format(addDays(new Date(), diff), 'yyyy-MM-dd') // ...else use next week
-      const end = format(addDays(new Date(start), this.numOfDays), 'yyyy-MM-dd')
+        isoToday > isoStart
+          ? format(subDays(new Date(), isoToday - isoStart), 'yyyy-MM-dd')
+          : format(addDays(new Date(), isoStart - isoToday), 'yyyy-MM-dd')
+      const end = format(addDays(new Date(start), n), 'yyyy-MM-dd')
       return { start, end }
     },
     addMinutes: (day, time, n) =>
