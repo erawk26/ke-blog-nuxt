@@ -1,16 +1,15 @@
 <template lang="pug">
     #work-week-grid.work-week.grid.eo-flex.col
         .eo-flex.full-width.flex-grow-1.rows.legend.days
-            .flex-grow.full-width
+            .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
             .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :key="i") {{daysOfWeek[i]}}
         .draggable
             .eo-flex.flex-grow-1.rows.full-width(v-for="(row,i) in timeSlots" :key="i" :class="'row-' + (i + 1)")
-                .eo-flex.a-end.j-end.flex-grow-1.cols.rel.legend.time
+                .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
                     span {{getTime(getDate(0),i+1).end}}
                 .flex-grow.cols(v-for="j in numOfDays" :key="j")
-                    .cal-cell.pa-5.ma-1(:data-day="getDate(j)" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")
+                    .cal-cell(:data-day="getDate(j)" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")
                         //small {{getTime(getDate(0),i+1).start}} to {{getTime(getDate(0),i+1).end}}
-        pre {{selected}}                
 </template>
 
 <script>
@@ -27,6 +26,7 @@ import {
   max
 } from 'date-fns'
 export default {
+  name: 'Scheduler',
   components: {},
   props: {
     calStart: {
@@ -55,7 +55,7 @@ export default {
       combined: null,
       selected: null,
       ds: null,
-      slotMins: 60, // how many minutes each slot should contain
+      slotMins: 30, // how many minutes each slot should contain
       today: format(new Date(), 'yyyy-MM-dd'),
       daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     }
@@ -74,11 +74,6 @@ export default {
       return hours * i
     }
   },
-  watch: {
-    selected(newVal) {
-      this.concatAppts(newVal)
-    }
-  },
   mounted() {
     /* eslint-disable no-undef */
     this.ds = new DragSelect({
@@ -90,6 +85,9 @@ export default {
     })
   },
   methods: {
+    reset() {
+      // TODO built a selection reset
+    },
     getDate(isoDay) {
       return format(addDays(new Date(this.calStart), isoDay), 'yyyy-MM-dd')
     },
@@ -108,7 +106,8 @@ export default {
         end: x.dataset.end,
         date: x.dataset.day
       }))
-      this.selected = this.groupBy(arr, 'date')
+      this.selected = this.concatTime(this.groupBy(arr, 'date'))
+      this.$emit('change', this.selected)
     },
     isOverlapping(int1, int2) {
       // console.log(int1, int2, this.today + 'T' + int1.start)
@@ -135,7 +134,7 @@ export default {
         return acc
       }, {})
     },
-    concatAppts(obj) {
+    concatTime(obj) {
       const dates = Object.keys(obj)
       dates.forEach(function(date) {
         const newArr = obj[date].reduce((intervalArray, currentInterval) => {
@@ -197,10 +196,21 @@ export default {
   .draggable {
     overflow: auto;
   }
+  .rows {
+    margin: 2px 0;
+    height: 20px;
+  }
   .cols {
+    &.legend.time {
+      width: 60px;
+      max-width: 60px;
+      min-width: 60px;
+    }
     // max-width: calc(100% / 8);
   }
   .cal-cell {
+    margin: 0 2px;
+    height: 100%;
     position: relative;
     .theme--dark & {
       &::before {
@@ -214,10 +224,10 @@ export default {
     }
     &::before {
       position: absolute;
-      left: 1px;
-      top: 1px;
-      bottom: 1px;
-      right: 1px;
+      left: 0px;
+      top: 0px;
+      bottom: 0px;
+      right: 0px;
       width: 100%;
       height: 100%;
       content: '';
@@ -230,7 +240,6 @@ export default {
         opacity: 0.7;
       }
     }
-    margin: 1px;
   }
 }
 </style>
