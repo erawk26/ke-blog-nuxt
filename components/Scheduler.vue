@@ -52,7 +52,6 @@ export default {
   },
   data() {
     return {
-      combined: null,
       selected: null,
       ds: null,
       slotMins: 30, // how many minutes each slot should contain
@@ -86,11 +85,9 @@ export default {
   },
   methods: {
     reset() {
-      console.log('reset fired')
       this.ds.clearSelection()
       this.selected = {}
       this.$emit('change', this.selected)
-      // TODO built a selection reset
     },
     getDate(isoDay) {
       return format(addDays(new Date(this.calStart), isoDay), 'yyyy-MM-dd')
@@ -101,7 +98,6 @@ export default {
         this.slotMins * n
       )
       const start = subMinutes(end, this.slotMins)
-      // console.log(start, end)
       return { start: format(start, 'HH:mm'), end: format(end, 'HH:mm') }
     },
     getSelected(e) {
@@ -110,11 +106,16 @@ export default {
         end: x.dataset.end,
         date: x.dataset.day
       }))
-      this.selected = this.concatTime(this.groupBy(arr, 'date'))
+      const that = this
+      const data = this.groupBy(arr, 'date')
+      this.selected = this.dateSort(
+        Object.keys(data).map((key) => ({
+          [key]: that.concatTime(that.timeSort(data[key], that.today))
+        }))
+      )
       this.$emit('change', this.selected)
     },
     isOverlapping(int1, int2) {
-      // console.log(int1, int2, this.today + 'T' + int1.start)
       return areIntervalsOverlapping(
         {
           start: new Date(this.today + 'T' + int2.start),
@@ -134,9 +135,15 @@ export default {
           new Date(Object.keys(b)[0] + 'T00:00')
         )
       }),
+    timeSort: (arr, date) =>
+      arr.sort(function(a, b) {
+        return compareAsc(
+          new Date(date + 'T' + a.start),
+          new Date(date + 'T' + b.start)
+        )
+      }),
     groupBy(objectArray, property) {
-      const sorted = this.dateSort(objectArray)
-      const arr = sorted.reduce(function(acc, obj) {
+      const newObj = objectArray.reduce(function(acc, obj) {
         const key = obj[property]
         if (!acc[key]) {
           acc[key] = []
@@ -145,49 +152,46 @@ export default {
         acc[key].push(obj)
         return acc
       }, {})
-      return arr
+      return newObj
     },
-    concatTime(obj) {
-      for (const date in obj) {
-        const times = obj[date]
-        const newArr = times.reduce((intervalArray, currentInterval) => {
-          let isSibling = false
-          const mutatedArray = intervalArray.map((itemInterval) => {
-            const itemStart = new Date(date + 'T' + itemInterval.start)
-            const itemEnd = new Date(date + 'T' + itemInterval.end)
-            const currStart = new Date(date + 'T' + currentInterval.start)
-            const currEnd = new Date(date + 'T' + currentInterval.end)
-            isSibling = areIntervalsOverlapping(
-              {
-                start: currStart,
-                end: currEnd
-              },
-              {
-                start: itemStart,
-                end: itemEnd
-              },
-              { inclusive: true }
-            )
-            const times = [itemStart, itemEnd, currStart, currEnd]
-            return isSibling
-              ? {
-                  start: format(min(times), 'HH:mm'),
-                  end: format(max(times), 'HH:mm')
-                }
-              : itemInterval
-          })
-          if (isSibling) {
-            // if current appt is next to another appt concat them
-            return mutatedArray
-          } else {
-            // else push the appt seperately
-            intervalArray.push(currentInterval)
-            return intervalArray
-          }
-        }, [])
-        obj[date] = newArr
-      }
-      return obj
+    concatTime(arr) {
+      const that = this
+      const newArr = arr.reduce((intervalArray, currentInterval) => {
+        let isSibling = false
+        const mutatedArray = intervalArray.map((itemInterval) => {
+          const itemStart = new Date(that.today + 'T' + itemInterval.start)
+          const itemEnd = new Date(that.today + 'T' + itemInterval.end)
+          const currStart = new Date(that.today + 'T' + currentInterval.start)
+          const currEnd = new Date(that.today + 'T' + currentInterval.end)
+          isSibling = areIntervalsOverlapping(
+            {
+              start: currStart,
+              end: currEnd
+            },
+            {
+              start: itemStart,
+              end: itemEnd
+            },
+            { inclusive: true }
+          )
+          const times = [itemStart, itemEnd, currStart, currEnd]
+          return isSibling
+            ? {
+                start: format(min(times), 'HH:mm'),
+                end: format(max(times), 'HH:mm')
+              }
+            : itemInterval
+        })
+        if (isSibling) {
+          // if current appt is next to another appt concat them
+          return mutatedArray
+        } else {
+          // else push the appt seperately
+          intervalArray.push(currentInterval)
+          return intervalArray
+        }
+      }, [])
+      return newArr
     }
   }
 }
