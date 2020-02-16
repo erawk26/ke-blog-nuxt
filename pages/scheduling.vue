@@ -11,13 +11,13 @@
           .eo-flex.center(v-if="!loading" key="clientContact")
             v-text-field.mr-3(outlined v-model="email" label="Email" required :rules='emailRules')
             v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
-          v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
           scheduler#scheduler(v-if="!loading" ref="scheduler" v-on:change="selectionChanged" :cal-start="calendar.start" :cal-end="calendar.end" :day-start="workDay.start" :day-end="workDay.end" :days="numOfDays" key="calendar")
-          v-card.pa-2.output(v-for="(day,i) in schedule.map(item=>Object.keys(item)[0])" :key="day")
-            span {{day}}
-              br
-              template(v-for="(time,j) in schedule[i][day]")
-                | {{time.replace(/:00/g,'')}} 
+          v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
+          v-card.unstyle.pa-2.mb-5.output(elevation="4" tag="ul" key="schedule" v-if="schedule.length")
+            li(v-for="(item,i) in schedule" :key="item.day") {{item.day}}
+              ul.unstyle
+                li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time.replace(/:00/g,'')}}
+              v-divider.mt-1(v-if="i < schedule.length - 1" )  
           .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
             v-btn.mr-4.bold(outlined color='success' @click='submitForm')
               | Send
@@ -25,7 +25,7 @@
               | Clear
           .warning.pa-3(rounded v-if="!canSubmit" key="warning")
             template(v-if="firstName.length<2") Please fill out your Name
-            template(v-if="Object.keys(this.datesObj).length===0") Please add your availability in the form
+            template(v-if="datesArr.length===0") Please add your availability in the form
 
 </template>
 
@@ -44,7 +44,8 @@ export default {
       phone: '',
       loading: true,
       today: format(new Date(), 'yyyy-MM-dd'),
-      datesObj: {},
+      datesArr: [],
+      schedule: [],
       comments: '',
       errorMsg: null,
       workDay: {
@@ -57,22 +58,8 @@ export default {
     }
   },
   computed: {
-    schedule() {
-      const keys = Object.keys(this.datesObj).sort((p, c) =>
-        compareAsc(new Date(p + 'T00:00'), new Date(c + 'T00:00'))
-      )
-      return keys.map((date) => {
-        const day = format(new Date(date + 'T00:00'), "iii MM'/'dd")
-        const times = this.datesObj[date].map((item) => {
-          const start = format(new Date(date + 'T' + item.start), 'p')
-          const end = format(new Date(date + 'T' + item.end), 'p')
-          return start + '-' + end
-        })
-        return { [day]: times }
-      })
-    },
     canSubmit() {
-      return this.firstName.length >= 2 && Object.keys(this.datesObj).length > 0
+      return this.firstName.length >= 2 && this.datesArr.length > 0
     }
   },
   watch: {},
@@ -97,6 +84,23 @@ export default {
     this.loading = false
   },
   methods: {
+    datesort: (arr) =>
+      arr.sort((p, c) =>
+        compareAsc(new Date(p + 'T00:00'), new Date(c + 'T00:00'))
+      ),
+    userFormat(data) {
+      const formatted = data.map((obj) => {
+        const day = Object.keys(obj)[0]
+        const formattedDay = format(new Date(day + 'T00:00'), "iii MM'/'dd")
+        const times = obj[day].map((item) => {
+          const start = format(new Date(day + 'T' + item.start), 'p')
+          const end = format(new Date(day + 'T' + item.end), 'p')
+          return start + '-' + end
+        })
+        return { day: formattedDay, times }
+      })
+      return formatted
+    },
     cal() {
       const isoToday = getISODay(new Date())
       const isoStart = this.startDay
@@ -109,7 +113,8 @@ export default {
       return { start, end }
     },
     selectionChanged(evt) {
-      this.datesObj = evt
+      this.datesArr = evt // Object.assign(evt)
+      this.schedule = this.userFormat(evt) // this.datesort(Object.assign(evt))
     },
     submitForm() {
       const obj = {
