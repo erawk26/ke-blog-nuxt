@@ -2,7 +2,7 @@
     #work-week-grid.work-week.grid.eo-flex.col
         .eo-flex.full-width.flex-grow-1.rows.legend.days
             .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
-            .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :key="i") {{daysOfWeek[i]}}
+            .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :key="col") {{daysOfWeek[i]}}
         .draggable
             .eo-flex.flex-grow-1.rows.full-width(v-for="(row,i) in timeSlots" :key="i" :class="'row-' + (i + 1)")
                 .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
@@ -86,8 +86,8 @@ export default {
   methods: {
     reset() {
       this.ds.clearSelection()
-      this.selected = {}
-      this.$emit('change', this.selected)
+      this.selected = []
+      this.$emit('change', [])
     },
     getDate(isoDay) {
       return format(addDays(new Date(this.calStart), isoDay), 'yyyy-MM-dd')
@@ -99,6 +99,9 @@ export default {
       )
       const start = subMinutes(end, this.slotMins)
       return { start: format(start, 'HH:mm'), end: format(end, 'HH:mm') }
+    },
+    formatTime(time, timeFormat) {
+      return format(new Date(this.today + 'T' + time), timeFormat)
     },
     getSelected(e) {
       const arr = e.map((x) => ({
