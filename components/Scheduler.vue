@@ -18,7 +18,7 @@ import {
   addMinutes,
   parseISO,
   areIntervalsOverlapping,
-  //   subDays,
+  compareAsc,
   subMinutes,
   addDays,
   format,
@@ -86,6 +86,10 @@ export default {
   },
   methods: {
     reset() {
+      console.log('reset fired')
+      this.ds.clearSelection()
+      this.selected = {}
+      this.$emit('change', this.selected)
       // TODO built a selection reset
     },
     getDate(isoDay) {
@@ -123,8 +127,16 @@ export default {
         { inclusive: true }
       )
     },
+    dateSort: (arr) =>
+      arr.sort(function(a, b) {
+        return compareAsc(
+          new Date(Object.keys(a)[0] + 'T00:00'),
+          new Date(Object.keys(b)[0] + 'T00:00')
+        )
+      }),
     groupBy(objectArray, property) {
-      return objectArray.reduce(function(acc, obj) {
+      const sorted = this.dateSort(objectArray)
+      const arr = sorted.reduce(function(acc, obj) {
         const key = obj[property]
         if (!acc[key]) {
           acc[key] = []
@@ -133,11 +145,12 @@ export default {
         acc[key].push(obj)
         return acc
       }, {})
+      return arr
     },
     concatTime(obj) {
-      const dates = Object.keys(obj)
-      dates.forEach(function(date) {
-        const newArr = obj[date].reduce((intervalArray, currentInterval) => {
+      for (const date in obj) {
+        const times = obj[date]
+        const newArr = times.reduce((intervalArray, currentInterval) => {
           let isSibling = false
           const mutatedArray = intervalArray.map((itemInterval) => {
             const itemStart = new Date(date + 'T' + itemInterval.start)
@@ -173,7 +186,7 @@ export default {
           }
         }, [])
         obj[date] = newArr
-      })
+      }
       return obj
     }
   }

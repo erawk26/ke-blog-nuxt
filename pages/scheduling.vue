@@ -13,11 +13,11 @@
             v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
           v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
           scheduler#scheduler(v-if="!loading" ref="scheduler" v-on:change="selectionChanged" :cal-start="calendar.start" :cal-end="calendar.end" :day-start="workDay.start" :day-end="workDay.end" :days="numOfDays" key="calendar")
-          .output(v-for="(day,i) in schedule.map(item=>Object.keys(item)[0])" :key="day")
+          v-card.pa-2.output(v-for="(day,i) in schedule.map(item=>Object.keys(item)[0])" :key="day")
             span {{day}}
               br
               template(v-for="(time,j) in schedule[i][day]")
-                | {{time}} 
+                | {{time.replace(/:00/g,'')}} 
           .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
             v-btn.mr-4.bold(outlined color='success' @click='submitForm')
               | Send
@@ -31,7 +31,7 @@
 
 <script>
 /* eslint-disable no-console */
-import { getISODay, subDays, addDays, format } from 'date-fns'
+import { getISODay, compareAsc, subDays, addDays, format } from 'date-fns'
 import { emailRules, nameRules } from '~/assets/js/formRules'
 import Scheduler from '~/components/Scheduler'
 export default {
@@ -58,7 +58,10 @@ export default {
   },
   computed: {
     schedule() {
-      return Object.keys(this.datesObj).map((date) => {
+      const keys = Object.keys(this.datesObj).sort((p, c) =>
+        compareAsc(new Date(p + 'T00:00'), new Date(c + 'T00:00'))
+      )
+      return keys.map((date) => {
         const day = format(new Date(date + 'T00:00'), "iii MM'/'dd")
         const times = this.datesObj[date].map((item) => {
           const start = format(new Date(date + 'T' + item.start), 'p')
