@@ -1,11 +1,11 @@
 <template lang="pug">
   section.carousel
-    carousel(loop autoplay navigation-enabled :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="[[760, 2] , [960, 3], [1080, 4]]")
+    carousel(loop autoplay :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="[[760, 2] , [960, 3], [1080, 4]]")
       slide(v-for='(slide, i) in slides', :key='i')
         v-card
           v-img(aspect-ratio="1.77" :src="slide.image")
-          .abs.right.bottom.pa-5
-            p(v-html="$md.render(slide.caption)")
+          .caption.full-width.abs.right.bottom.px-5.text-right(v-if="slide.caption")
+            span.text-shadow(v-html="$md.render(slide.caption)")
 </template>
 
 <script>
@@ -49,4 +49,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.caption {
+  color: $primary;
+  background: linear-gradient(
+    180deg,
+    rgba(black, 0) 0%,
+    rgba(black, 0.35) 75%,
+    rgba(black, 0.65) 100%
+  );
+}
+</style>
