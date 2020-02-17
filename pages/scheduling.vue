@@ -3,7 +3,7 @@
     section.body.pa-5.max-pg-width
       h1.uc {{title}}
       div(v-html="$md.render(body)")
-      v-form(ref='availability')
+      v-form(ref='availability' v-on:submit.prevent)
         transition-group(name="accordion-fade")
           .eo-flex.center(v-if="!loading" key="clientName")
             v-text-field.mr-3(outlined v-model="firstName" label="First Name" required :rules='nameRules')
@@ -16,7 +16,7 @@
           v-card.unstyle.pa-2.mb-5.output(elevation="4" tag="ul" key="schedule" v-if="schedule.length")
             li(v-for="(item,i) in schedule" :key="item.day") {{item.day}}
               ul.unstyle
-                li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time.replace(/:00/g,'')}}
+                li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time}}
               v-divider.mt-1(v-if="i < schedule.length - 1" )  
           .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
             v-btn.mr-4.bold(outlined color='success' @click='submitForm')
@@ -91,11 +91,11 @@ export default {
     userFormat(data) {
       const formatted = data.map((obj) => {
         const day = Object.keys(obj)[0]
-        const formattedDay = format(new Date(day + 'T00:00'), "iii MM'/'dd")
+        const formattedDay = format(new Date(day + 'T00:00'), 'iiii, MMM do')
         const times = obj[day].map((item) => {
-          const start = format(new Date(day + 'T' + item.start), 'p')
-          const end = format(new Date(day + 'T' + item.end), 'p')
-          return start + '-' + end
+          const start = format(new Date(day + 'T' + item.start), 'h:mmaaaa')
+          const end = format(new Date(day + 'T' + item.end), 'h:mmaaaa')
+          return (start + ' - ' + end).replace(/:00|\./gi, '')
         })
         return { day: formattedDay, times }
       })
