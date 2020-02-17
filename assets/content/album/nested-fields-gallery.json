@@ -6,51 +6,65 @@
     {
       "title": "Slide 1",
       "alt": "Slide 1 Alt Text",
-      "image": "https://cdn.vuetifyjs.com/images/carousel/bird.jpg",
+      "image": "/img/Katie001.jpg",
       "video": "Slide 1 Video URL",
-      "caption": "##### ***Donec** sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula.* \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet liguamus magna justo, lacinia eget consectetur sed."
     },
     {
       "title": "Slide 2",
       "alt": "Slide 2 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "/img/Katie002.jpg",
       "video": "Slide 2 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Donec sollicitudin molestie malesuada.ectetur sed."
     },
     {
       "title": "Slide 3",
       "alt": "Slide 3 Alt Text",
-      "image": "https://cdn.vuetifyjs.com/images/carousel/sky.jpg",
+      "image": "/img/Katie003.jpg",
       "video": "Slide 3 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Donec sollicitudin molestie malesuada."
     },
     {
       "title": "Slide 5",
       "alt": "Slide 5 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "/img/Katie005.jpg",
       "video": "Slide 5 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Donec sollicitudin molestie malesuada."
     },
     {
       "title": "Slide 4",
       "alt": "Slide 4 Alt Text",
-      "image": "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
+      "image": "/img/Katie004.jpg",
       "video": "Slide 4 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Vestibulum ante ipsum"
     },
     {
       "title": "Slide 6",
       "alt": "Slide 6 Alt Text",
-      "image": "/img/1200x900.png",
+      "image": "/img/Katie006.jpg",
       "video": "Slide 6 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Vestibulum ante ipsum"
     },
     {
       "title": "Slide 7",
       "alt": "Slide 7 Alt Text",
-      "image": "https://cdn.vuetifyjs.com/images/carousel/planet.jpg",
+      "image": "/img/Katie007.jpg",
       "video": "Slide 7 Video URL",
-      "caption": "Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet ligula. \n\n> Sample quote\n\nVivamus magna justo, lacinia eget consectetur sed."
+      "caption": "Vestibulum ante ipsum"
+    },
+    {
+      "title": "Slide 8",
+      "alt": "Slide 8 Alt Text",
+      "image": "/img/Katie008.jpg",
+      "video": "Slide 8 Video URL",
+      "caption": "Donec sollicitudin molestie"
+    },
+    {
+      "title": "Slide 9",
+      "alt": "Slide 9 Alt Text",
+      "image": "/img/Katie009.jpg",
+      "video": "Slide 9 Video URL",
+      "caption": "Vestibulum ante ipsum"
     }
   ]
 }
