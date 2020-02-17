@@ -4,13 +4,6 @@
   "style": "default",
   "slides": [
     {
-      "title": "Slide 1",
-      "alt": "Slide 1 Alt Text",
-      "image": "/img/Katie001.jpg",
-      "video": "Slide 1 Video URL",
-      "caption": "malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet liguamus magna justo, lacinia eget consectetur sed."
-    },
-    {
       "title": "Slide 2",
       "alt": "Slide 2 Alt Text",
       "image": "/img/Katie002.jpg",
@@ -22,6 +15,13 @@
       "image": "/img/Katie003.jpg",
       "video": "Slide 3 Video URL",
       "caption": "Donec sollicitudin molestie malesuada."
+    },
+    {
+      "title": "Slide 9",
+      "alt": "Slide 9 Alt Text",
+      "image": "/img/Katie009.jpg",
+      "video": "Slide 9 Video URL",
+      "caption": "Vestibulum ante ipsum"
     },
     {
       "title": "Slide 5",
@@ -59,11 +59,11 @@
       "caption": "Donec sollicitudin molestie"
     },
     {
-      "title": "Slide 9",
-      "alt": "Slide 9 Alt Text",
-      "image": "/img/Katie009.jpg",
-      "video": "Slide 9 Video URL",
-      "caption": "Vestibulum ante ipsum"
+      "title": "Slide 1",
+      "alt": "Slide 1 Alt Text",
+      "image": "/img/Katie001.jpg",
+      "video": "Slide 1 Video URL",
+      "caption": "malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet liguamus magna justo, lacinia eget consectetur sed."
     }
   ]
 }
