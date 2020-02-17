@@ -4,28 +4,43 @@
       h1.uc {{title}}
       div(v-html="$md.render(body)")
       v-form(ref='availability' v-on:submit.prevent)
-        transition-group(name="accordion-fade")
-          .eo-flex.center(v-if="!loading" key="clientName")
-            v-text-field.mr-3(outlined v-model="firstName" label="First Name" required :rules='nameRules')
-            v-text-field.ml-3(outlined v-model="lastName" label="Last Name" required :rules='nameRules')
-          .eo-flex.center(v-if="!loading" key="clientContact")
-            v-text-field.mr-3(outlined v-model="email" label="Email" required :rules='emailRules')
-            v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
-          scheduler#scheduler(v-if="!loading" ref="scheduler" v-on:change="selectionChanged" :cal-start="calendar.start" :cal-end="calendar.end" :day-start="workDay.start" :day-end="workDay.end" :days="numOfDays" key="calendar")
-          v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
-          v-card.unstyle.pa-2.mb-5.output(elevation="4" tag="ul" key="schedule" v-if="schedule.length")
-            li(v-for="(item,i) in schedule" :key="item.day") {{item.day}}
-              ul.unstyle
-                li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time}}
-              v-divider.mt-1(v-if="i < schedule.length - 1" )  
-          .eo-flex.two-cols.a-start(v-if="canSubmit" key="formBtns")
-            v-btn.mr-4.bold(outlined color='success' @click='submitForm')
-              | Send
-            v-btn.mr-4.bold(outlined color='error' @click='reset')
-              | Clear
-          .warning.pa-3(rounded v-if="!canSubmit" key="warning")
-            template(v-if="firstName.length<2") Please fill out your Name
-            template(v-if="datesArr.length===0") Please add your availability in the form
+        v-stepper(v-model='stepper', vertical='')
+          v-stepper-step(:complete='stepper > 1', step='1' @click="stepper=1")
+            | Enter Your Contact Info
+          v-stepper-content(step='1')
+            .eo-flex.center.pt-2
+              v-text-field.mr-3(outlined v-model="firstName" label="First Name" required :rules='nameRules')
+              v-text-field.ml-3(outlined v-model="lastName" label="Last Name" required :rules='nameRules')
+            .eo-flex.center.pt-2
+              v-text-field.mr-3(outlined v-model="email" label="Email" required :rules='emailRules')
+              v-text-field.ml-3(outlined v-model="phone" label="Phone" required)
+            v-btn.ml-2(outlined color='primary', @click='stepper += 1' :disabled="firstName.length<=2") Next
+          v-stepper-step(:complete='stepper > 2', step='2' @click="stepper=Math.min(stepper,2)") Select Availability
+          v-stepper-content(step='2')
+            scheduler#scheduler(ref="scheduler" v-on:change="selectionChanged" :cal-start="calendar.start" :cal-end="calendar.end" :day-start="workDay.start" :day-end="workDay.end" :days="numOfDays")
+            v-card.unstyle.pa-2.mb-5.output(elevation="4" tag="ul" key="schedule" v-if="schedule.length")
+              li(v-for="(item,i) in schedule" :key="item.day") {{item.day}}
+                ul.unstyle
+                  li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time}}
+                v-divider.mt-1(v-if="i < schedule.length - 1" )  
+            v-btn.mr-2(outlined color='primary', @click='stepper -= 1') Prev
+            v-btn.ml-2(outlined color='primary', @click='stepper += 1' :disabled="datesArr.length===0") Next
+          v-stepper-step(:complete='stepper > 3', step='3') Confirm Info
+          v-stepper-content(step='3' @click="stepper=Math.min(stepper,3)")
+            v-card.unstyle.pa-2.mb-5.output(elevation="4" tag="ul" key="schedule" v-if="schedule.length")
+              li {{firstName}} {{lastName}} {{phone}} {{email}}
+              li(v-for="(item,i) in schedule" :key="item.day") {{item.day}}
+                ul.unstyle
+                  li.flex.inline.mx-2(v-for="(time,j) in item.times") {{time}}
+                v-divider.mt-1(v-if="i < schedule.length - 1" ) 
+            v-textarea(v-if="firstName.length>=2" key="comments" outlined v-model='comments' label="comments" required)
+            .eo-flex.pt-2.two-cols.a-start(key="formBtns")
+              v-btn.mr-2(outlined color='primary', @click='stepper -= 1')
+                | Prev
+              v-btn.mr-2.bold(:disabled="!canSubmit" outlined color='success' @click='submitForm')
+                | Send
+              v-btn.mr-2.bold(outlined @click='reset')
+                | Clear
 
 </template>
 
@@ -38,6 +53,7 @@ export default {
   components: { Scheduler },
   data() {
     return {
+      stepper: 1,
       firstName: '',
       lastName: '',
       email: '',
@@ -129,6 +145,7 @@ export default {
     },
     reset() {
       this.$refs.scheduler.reset()
+      this.stepper = 2
       this.comments = ''
     }
   }
