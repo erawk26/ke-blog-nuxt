@@ -2,14 +2,14 @@
     #work-week-grid.work-week.grid.eo-flex.col
         .eo-flex.full-width.flex-grow-1.rows.legend.days
             .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
-            .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :key="col") {{daysOfWeek[i]}}
+            .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :title="getDate(i + 1)" :key="col")
+              button.full-width(@click="toggleDay(getDate(i + 1))") {{daysOfWeek[i]}}
         .draggable
             .eo-flex.flex-grow-1.rows.full-width(v-for="(row,i) in timeSlots" :key="i" :class="'row-' + (i + 1)")
                 .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
-                    span {{getTime(getDate(0),i+1).end}}
+                    small {{getTime(getDate(0),i+1,12).end}}
                 .flex-grow.cols(v-for="j in numOfDays" :key="j")
                     .cal-cell(:data-day="getDate(j)" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")
-                        //small {{getTime(getDate(0),i+1).start}} to {{getTime(getDate(0),i+1).end}}
 </template>
 
 <script>
@@ -92,13 +92,17 @@ export default {
     getDate(isoDay) {
       return format(addDays(new Date(this.calStart), isoDay), 'yyyy-MM-dd')
     },
-    getTime(date, n) {
+    getTime(date, n, hours = 24) {
+      hours = hours === 24 ? 'HH:mm' : 'h:mm'
       const end = addMinutes(
         parseISO(date + 'T' + this.dayStart),
         this.slotMins * n
       )
       const start = subMinutes(end, this.slotMins)
-      return { start: format(start, 'HH:mm'), end: format(end, 'HH:mm') }
+      return {
+        start: format(start, hours),
+        end: format(end, hours)
+      }
     },
     formatTime(time, timeFormat) {
       return format(new Date(this.today + 'T' + time), timeFormat)
@@ -117,6 +121,18 @@ export default {
         }))
       )
       this.$emit('change', this.selected)
+    },
+    toggleDay(day) {
+      const selection = this.ds.getSelection()
+      const hasDay = selection.map((x) => x.dataset.day).includes(day)
+      if (hasDay) {
+        const nodes = selection.filter((x) => x.dataset.day === day)
+        this.ds.removeSelection(nodes)
+      } else {
+        const nodes = document.querySelectorAll(`[data-day="${day}"]`)
+        this.ds.addSelection(nodes)
+      }
+      this.getSelected(this.ds.getSelection())
     },
     isOverlapping(int1, int2) {
       return areIntervalsOverlapping(
@@ -161,7 +177,7 @@ export default {
       const that = this
       const newArr = arr.reduce((intervalArray, currentInterval) => {
         let isSibling = false
-        const mutatedArray = intervalArray.map((itemInterval) => {
+        const combinedIntervals = intervalArray.map((itemInterval) => {
           const itemStart = new Date(that.today + 'T' + itemInterval.start)
           const itemEnd = new Date(that.today + 'T' + itemInterval.end)
           const currStart = new Date(that.today + 'T' + currentInterval.start)
@@ -186,10 +202,10 @@ export default {
             : itemInterval
         })
         if (isSibling) {
-          // if current appt is next to another appt concat them
-          return mutatedArray
+          // if current interval is next to another interval combine them
+          return combinedIntervals
         } else {
-          // else push the appt seperately
+          // else push the interval seperately
           intervalArray.push(currentInterval)
           return intervalArray
         }
@@ -206,7 +222,8 @@ export default {
     padding-right: 17px;
   }
   &.time {
-    span {
+    span,
+    small {
       transform: translate(-10px, 50%);
     }
   }
