@@ -96,6 +96,7 @@ export default {
       this.comments = formData.comments
       this.phone = formData.phone
       this.email = formData.email
+      this.setSchedule(formData.datesArr)
     }
     this.loading = false
   },
@@ -108,7 +109,7 @@ export default {
       const formatted = data.map((obj) => {
         const day = Object.keys(obj)[0]
         const formattedDay = format(new Date(day + 'T00:00'), 'iiii, MMM do')
-        const times = obj[day].map((item) => {
+        const times = this.$refs.scheduler.concatTime(obj[day]).map((item) => {
           const start = format(new Date(day + 'T' + item.start), 'h:mmaaaa')
           const end = format(new Date(day + 'T' + item.end), 'h:mmaaaa')
           return (start + ' - ' + end).replace(/:00|\./gi, '')
@@ -129,19 +130,32 @@ export default {
       return { start, end }
     },
     selectionChanged(evt) {
-      this.datesArr = evt // Object.assign(evt)
-      this.schedule = this.userFormat(evt) // this.datesort(Object.assign(evt))
+      this.datesArr = evt
+      this.schedule = this.userFormat(evt)
     },
     submitForm() {
       const obj = {
         firstName: this.firstName,
         lastName: this.lastName,
         schedule: this.schedule,
+        datesArr: this.datesArr,
         comments: this.comments,
         email: this.email,
         phone: this.phone
       }
       localStorage.setItem('formInfo', JSON.stringify(obj))
+    },
+    setSchedule(data) {
+      const startDay = new Date(this.calendar.start + 'T00:00')
+      const startISO = getISODay(startDay) // get the day
+      // TODO get old dates and convert to new ones based off day of week ISO
+
+      // const newDay = format(addDays(startDay, diff), 'yyyy-MM-dd')
+      // return {
+      //   [newDay]: { start: item[itemDay].start, end: item[itemDay].end }
+      // }
+      console.log(startDay, startISO)
+      this.$refs.scheduler.setSelected(data)
     },
     reset() {
       this.$refs.scheduler.reset()

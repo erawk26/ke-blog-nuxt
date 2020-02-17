@@ -4,12 +4,12 @@
             .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
             .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :title="getDate(i + 1)" :key="col")
               button.full-width(@click="toggleDay(getDate(i + 1))") {{daysOfWeek[i+numOfDays%numOfDays]}}
-        .draggable
+        .draggable.pb-2
             .eo-flex.flex-grow-1.rows.full-width(v-for="(row,i) in timeSlots" :key="i" :class="'row-' + (i + 1)")
                 .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
                     small {{getTime(getDate(0),i+1,12).end}}
                 .flex-grow.cols(v-for="(j, ind) in numOfDays" :key="j")
-                    .cal-cell(:data-day="getDate(ind + 1)" :class="{'valid':slotValid(getDate(j),getTime(getDate(0),i+1).start)}" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")
+                    .cal-cell(:data-day="getDate(ind + 1)" :class="{'valid':slotValid(getDate(j),getTime(getDate(0),i+1).start)}" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")       
 </template>
 
 <script>
@@ -109,8 +109,23 @@ export default {
     },
     slotValid(date, time) {
       const c = compareAsc(new Date(date + 'T' + time), new Date())
-      console.log(new Date(date + 'T' + time), new Date())
+      // console.log(new Date(date + 'T' + time), new Date())
       return c > -1
+    },
+    setSelected(e) {
+      const nodes = []
+      e.forEach((d) => {
+        const date = Object.keys(d)[0]
+        const times = d[date]
+        times.forEach((time) => {
+          const sel = `.valid[data-day="${date}"][data-start="${time.start}"]`
+          // if (sel) {
+          nodes.push(sel)
+          // }
+        })
+      })
+      this.ds.addSelection(document.querySelectorAll(nodes.join(',')))
+      this.getSelected(this.ds.getSelection())
     },
     getSelected(e) {
       const arr = e.map((x) => ({
@@ -122,7 +137,7 @@ export default {
       const data = this.groupBy(arr, 'date')
       this.selected = this.dateSort(
         Object.keys(data).map((key) => ({
-          [key]: that.concatTime(that.timeSort(data[key], that.today))
+          [key]: that.timeSort(data[key], that.today)
         }))
       )
       this.$emit('change', this.selected)
