@@ -5,24 +5,32 @@
   "slides": [
     {
       "image": "/img/img_7939.jpeg",
-      "title": "Slide 6"
+      "title": "Dante"
     },
     {
       "image": "/img/IMG-9316.JPG",
-      "title": "Slide 2"
-    },
-    {
-      "image": "/img/83968653_793193834496358_2245894194998542336_n.jpg",
-      "title": "Slide 3 "
+      "title": "Levander longe"
     },
     {
       "image": "/img/83092473_778221092660299_6297003349694742528_n.jpg",
-      "title": "Slide 4"
+      "title": "Fernando Canter "
     },
     {
-      "title": "Fernando",
+      "image": "/img/83968653_793193834496358_2245894194998542336_n.jpg",
+      "title": "Fernando trot "
+    },
+    {
+      "title": "Fernando Canter",
       "alt": "",
       "image": "/img/Katie002.jpg"
+    },
+    {
+      "image": "/img/82395089_778221125993629_9212218247305232384_n.jpg",
+      "title": "Birmingham "
+    },
+    {
+      "image": "/img/80675237_10215921435245004_3682402636289540096_o.jpg",
+      "title": "Fernando Show "
     }
   ]
 }
