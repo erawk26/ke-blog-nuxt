@@ -4,12 +4,20 @@
   "style": "default",
   "slides": [
     {
+      "image": "/img/80675237_10215921435245004_3682402636289540096_o.jpg",
+      "title": "Fernando Show "
+    },
+    {
       "image": "/img/img_7939.jpeg",
       "title": "Dante"
     },
     {
       "image": "/img/IMG-9316.JPG",
       "title": "Levander longe"
+    },
+    {
+      "image": "/img/82395089_778221125993629_9212218247305232384_n.jpg",
+      "title": "Birmingham "
     },
     {
       "image": "/img/83092473_778221092660299_6297003349694742528_n.jpg",
@@ -25,12 +33,8 @@
       "image": "/img/Katie002.jpg"
     },
     {
-      "image": "/img/82395089_778221125993629_9212218247305232384_n.jpg",
-      "title": "Birmingham "
-    },
-    {
-      "image": "/img/80675237_10215921435245004_3682402636289540096_o.jpg",
-      "title": "Fernando Show "
+      "image": "/img/IMG-8470.JPG",
+      "title": "Lord Ferragamo "
     }
   ]
 }
