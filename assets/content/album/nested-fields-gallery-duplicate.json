@@ -4,11 +4,8 @@
   "style": "default",
   "slides": [
     {
-      "title": "Slide 1",
-      "alt": "Slide 1 Alt Text",
-      "image": "/img/Katie001.jpg",
-      "video": "Slide 1 Video URL",
-      "caption": "malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit [neque](//www.gitlab.com), auctor sit amet aliquam vel, ullamcorper sit amet liguamus magna justo, lacinia eget consectetur sed."
+      "image": "/img/img_7939.jpeg",
+      "title": "Slide 6"
     },
     {
       "image": "/img/IMG-9316.JPG",
@@ -23,16 +20,9 @@
       "title": "Slide 4"
     },
     {
-      "image": "/img/83092473_778221092660299_6297003349694742528_n.jpg",
-      "title": "Slide 5"
-    },
-    {
-      "image": "/img/img_7939.jpeg",
-      "title": "Slide 6"
-    },
-    {
-      "title": "wadawdwad",
-      "alt": "wadawd"
+      "title": "Fernando",
+      "alt": "",
+      "image": "/img/Katie002.jpg"
     }
   ]
 }
