@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   branch: master
-
+local_backend: true
 media_folder: static/img
 public_folder: /img
 
@@ -31,6 +31,14 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Menu Icon', name: 'icon', widget: 'string', default: 'home', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: "Album Style"
+        name: "albumStyle"
+        widget: "select"
+        options:
+          - { label: "Full Width", value: 'hero' }
+          - { label: "Left", value: 'left' }
+          - { label: "Right", value: 'right' }
+          - { label: "Center", value: 'center' }
       - label: "Album"
         name: "albumRel"
         widget: "relation"
@@ -39,6 +47,48 @@ collections:
         valueField: "title"
         displayFields: ["title"]
         required: true
+      - label: "Post Body Components"
+        name: "sections"
+        widget: "list"
+        types:
+          - label: "Carousel"
+            name: "carousel"
+            widget: object
+            fields:
+              - label: "Album Style"
+                name: "albumStyle"
+                widget: "select"
+                options:
+                  - { label: "Full Width", value: 'hero' }
+                  - { label: "Left", value: 'left' }
+                  - { label: "Right", value: 'right' }
+                  - { label: "Center", value: 'center' }
+              - label: "Album"
+                name: "albumRel"
+                widget: "relation"
+                collection: "album"
+                searchFields: ["title", "desc"]
+                valueField: "title"
+                displayFields: ["title"]
+                required: true
+          - label: "Testimonial"
+            name: "testimonial"
+            widget: object
+            fields:
+              - label: "Testimonial"
+                name: "testimonialRel"
+                widget: "relation"
+                collection: "testimonials"
+                searchFields: ["title", "desc"]
+                valueField: "title"
+                displayFields: ["title"]
+                required: true      
+          - label: "Spotlight"
+            name: "spotlight"
+            widget: object
+            fields:
+              - {label: Template, name: template, widget: string, default: "spotlight.html"}
+              - {label: Text, name: text, widget: text, default: "Hello World"}
   - name: "album" # Used in routes, e.g., /admin/collections/blog
     label: "Album" # Used in the UI
     format: 'json'
@@ -49,8 +99,7 @@ collections:
       preview: true
     fields:
       - { label: 'Title', name: 'title', required: true }
-      - { label: 'Description', name: 'desc', required: false }
-      - { label: 'Style', name: 'style', required: false }
+      - { label: 'Description', name: 'body', widget: 'markdown', required: false }
       - label: "Slides"
         name: "slides"
         widget: "list"
@@ -60,6 +109,23 @@ collections:
           - { label: 'Image', name: 'image', widget: 'image', required: false}
           - { label: 'Video', name: 'video', widget: 'string', required: false}
           - { label: 'Caption', name: 'caption', widget: 'markdown', required: false }
+  - name: "Testimonials" # Used in routes, e.g., /admin/collections/blog
+    label: "testimonials" # Used in the UI
+    format: 'json'
+    folder: "assets/content/testimonials" # The path to the folder where the documents are stored
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: true
+    fields:
+      - { label: 'Title', name: 'title', required: true }
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: 'Name', name: 'name', required: true }
+          - { label: 'Image', name: 'image', widget: 'image', required: false}
+          - { label: 'Testimonial', name: 'testimonialBody', widget: 'markdown', required: false }     
   - name: "page2" # Used in routes, e.g., /admin/collections/blog
     label: "Single Use Data Stuctures" # Used in the UI
     format: 'json'
