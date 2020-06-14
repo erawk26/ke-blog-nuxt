@@ -1,0 +1,56 @@
+{
+  "title": "Nested Fields Gallery duplicate",
+  "desc": "testing nested fields with this gallery collection",
+  "style": "default",
+  "slides": [
+    {
+      "image": "/img/80675237_10215921435245004_3682402636289540096_o.jpg",
+      "title": "Fernando Show "
+    },
+    {
+      "image": "/img/img_7939.jpeg",
+      "title": "Dante"
+    },
+    {
+      "image": "/img/IMG-9316.JPG",
+      "title": "Levander longe"
+    },
+    {
+      "image": "/img/82395089_778221125993629_9212218247305232384_n.jpg",
+      "title": "Birmingham "
+    },
+    {
+      "image": "/img/83092473_778221092660299_6297003349694742528_n.jpg",
+      "title": "Fernando Canter "
+    },
+    {
+      "image": "/img/83968653_793193834496358_2245894194998542336_n.jpg",
+      "title": "Fernando trot "
+    },
+    {
+      "title": "Fernando Canter",
+      "alt": "",
+      "image": "/img/Katie002.jpg"
+    },
+    {
+      "image": "/img/IMG-8470.JPG",
+      "title": "Lord Ferragamo "
+    },
+    {
+      "image": "/img/27B7CD87-BC13-4AE9-8A5D-8A8BB2B3CB86.JPG",
+      "title": "Roxanne"
+    },
+    {
+      "image": "/img/IMG-8982.JPG",
+      "title": "Levander Pat "
+    },
+    {
+      "image": "/img/IMG-8929.JPG",
+      "title": "Katie and Levander"
+    },
+    {
+      "image": "/img/55731079_578350619314015_3015385522206932992_n.jpg",
+      "title": "LF"
+    }
+  ]
+}
