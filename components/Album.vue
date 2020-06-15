@@ -1,6 +1,6 @@
 <template lang="pug">
-  section.carousel
-    carousel(loop autoplay :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="style==='hero'?[[760, 2] , [960, 3], [1080, 4]]:false")
+  section(:class="type")
+    carousel(v-if="type=='carousel'" loop autoplay :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="type==='hero'?[[760, 2] , [960, 3], [1080, 4]]:[]")
       slide(v-for='(slide, i) in slides', :key='i')
         v-card
           v-img(aspect-ratio="1.77" :src="slide.image")
@@ -16,10 +16,6 @@ export default {
       default: () => []
     },
     title: {
-      type: String,
-      default: null
-    },
-    style: {
       type: String,
       default: null
     },

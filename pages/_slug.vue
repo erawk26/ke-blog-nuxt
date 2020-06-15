@@ -1,7 +1,7 @@
 <template lang="pug">
   article.page(:class="$route.name")
-    section.album(:class="albumStyle")
-      album.rel(v-if="sliderData" :albumStyle="albumStyle" type="carousel" :slides="sliderData.slides" :title="sliderData.title")
+    section.album(:class="type()")
+      album.rel(v-if="sliderData" :type="type()" :slides="sliderData.slides" :title="sliderData.title")
     section.body.pa-5.max-pg-width
       h1.uc {{title}}
       div(v-html="$md.render(body)")
@@ -21,6 +21,7 @@ export default {
         : null
     }
   },
+
   async asyncData({ params, payload }) {
     if (payload) {
       return payload
@@ -34,6 +35,13 @@ export default {
       // } catch {
       // }
       return obj
+    }
+  },
+  methods: {
+    type() {
+      return this.sliderData.type === 'default'
+        ? 'carousel'
+        : this.sliderData.type
     }
   }
 }
