@@ -1,7 +1,7 @@
 <template lang="pug">
   article.page(:class="$route.name")
-    section.hero
-      album.rel(v-if="sliderData" type="carousel" :slides="sliderData.slides" :title="sliderData.title")
+    section.album(:class="albumStyle")
+      album.rel(v-if="sliderData" :albumStyle="albumStyle" type="carousel" :slides="sliderData.slides" :title="sliderData.title")
     section.body.pa-5.max-pg-width
       h1.uc {{title}}
       div(v-html="$md.render(body)")
@@ -39,4 +39,17 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.album {
+  @include set-max-width;
+  &.hero {
+    @include set-max-width(100%);
+  }
+  &.left {
+  }
+  &.right {
+  }
+  &.center {
+  }
+}
+</style>
