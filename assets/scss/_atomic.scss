@@ -292,6 +292,10 @@
     align-items: center;
   }
 
+  &.a-base {
+    align-items: baseline;
+  }
+
   &.a-end {
     align-items: flex-end;
   }
