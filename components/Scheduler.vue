@@ -108,9 +108,9 @@ export default {
       return format(new Date(this.today + 'T' + time), timeFormat)
     },
     slotValid(date, time) {
-      const c = compareAsc(new Date(date + 'T' + time), new Date())
-      // console.log(new Date(date + 'T' + time), new Date())
-      return c > -1
+      const slotDate = new Date(date + 'T' + time)
+      const dateNow = new Date()
+      return compareAsc(slotDate, dateNow) > 0
     },
     setSelected(e) {
       const nodes = []
