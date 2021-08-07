@@ -1,4 +1,5 @@
-import { company } from '~/site.info.js'
+// import { company } from '~/site.info.js'
+const company = JSON.parse(process.env.NUXT_ENV_COMPANY_INFO)
 export const state = () => ({
   siteInfo: {
     company

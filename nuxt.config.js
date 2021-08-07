@@ -45,9 +45,12 @@ export default {
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources'
   ],
-  modules: ['@nuxtjs/markdownit'],
+  modules: ['@nuxtjs/markdownit', '@nuxtjs/axios'],
   markdownit: {
     injected: true
+  },
+  axios: {
+    baseURL: process.env.NUXT_ENV_MONGODB_URI
   },
   generate: {
     routes() {
