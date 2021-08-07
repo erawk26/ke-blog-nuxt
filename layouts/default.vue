@@ -12,7 +12,7 @@
       app)
       component(is="Header")
       v-app-bar-nav-icon.mobile-only(@click="drawer=!drawer")
-    v-content.main-layout.full-width.row-1.row-span-1.col-full
+    v-main.main-layout.full-width.row-1.row-span-1.col-full
       nuxt
     component(is="Footer").row-2.row-span-1.col-full
 </template>
