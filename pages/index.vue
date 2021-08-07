@@ -12,13 +12,6 @@
 
 <script>
 export default {
-  head() {
-    return {
-      script: [
-        { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' }
-      ]
-    }
-  },
   components: {},
   async asyncData({ params, payload }) {
     if (payload) {
@@ -27,6 +20,13 @@ export default {
       const obj = await require('~/assets/content/page2/homepage.json')
       obj.sliderData = await require('~/assets/content/album/nested-fields-gallery.json')
       return obj
+    }
+  },
+  head() {
+    return {
+      script: [
+        { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' }
+      ]
     }
   }
 }
