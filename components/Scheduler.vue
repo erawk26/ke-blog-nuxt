@@ -1,15 +1,29 @@
 <template lang="pug">
-    #work-week-grid.work-week.grid.eo-flex.col
-        .eo-flex.full-width.flex-grow-1.rows.legend.days
-            .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
-            .eo-flex.center.flex-grow.cols.center-text.full-width(v-for="(col,i) in numOfDays" :title="getDate(i + 1)" :key="col")
-              button.full-width(@click="toggleDay(getDate(i + 1))") {{daysOfWeek[i+numOfDays%numOfDays]}}
-        .draggable.pb-2
-            .eo-flex.flex-grow-1.rows.full-width(v-for="(row,i) in timeSlots" :key="i" :class="'row-' + (i + 1)")
-                .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
-                    small {{getTime(getDate(0),i+1,12).end}}
-                .flex-grow.cols(v-for="(j, ind) in numOfDays" :key="j")
-                    .cal-cell(:data-day="getDate(ind + 1)" :class="{'valid':slotValid(getDate(j),getTime(getDate(0),i+1).start)}" :data-start="getTime(getDate(0),i+1).start" :data-end="getTime(getDate(0),i+1).end")       
+#work-week-grid.work-week.grid.eo-flex.col
+  .eo-flex.full-width.flex-grow-1.rows.legend.days
+    .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
+    .eo-flex.center.flex-grow.cols.center-text.full-width(
+      v-for='(col, i) in numOfDays',
+      :title='getDate(i + 1)',
+      :key='col'
+    )
+      button.full-width(@click='toggleDay(getDate(i + 1))') {{ daysOfWeek[(isoStart + i - 1) % 7] }}
+  .draggable.pb-2
+    .eo-flex.flex-grow-1.rows.full-width(
+      v-for='(row, i) in timeSlots',
+      :key='i',
+      :class='"row-" + (i + 1)'
+    )
+      .eo-flex.a-end.j-end.flex-grow-0.cols.rel.legend.time
+        small {{ getTime(getDate(0), i + 1, 12).end }}
+      .flex-grow.cols(v-for='(j, ind) in numOfDays', :key='j')
+        .cal-cell(
+          :data-valid-time='slotValid(getDate(j), getTime(getDate(0), i + 1).start)',
+          :data-day='getDate(ind + 1)',
+          :class='{ valid: slotValid(getDate(j), getTime(getDate(0), i + 1).start) }',
+          :data-start='getTime(getDate(0), i + 1).start',
+          :data-end='getTime(getDate(0), i + 1).end'
+        )
 </template>
 
 <script>
@@ -48,6 +62,10 @@ export default {
     days: {
       type: Number,
       default: 7
+    },
+    isoStart: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -75,13 +93,15 @@ export default {
   },
   mounted() {
     /* eslint-disable no-undef */
-    this.ds = new DragSelect({
-      selectables: document.querySelectorAll('.cal-cell.valid'),
-      area: document.querySelector('.draggable'),
-      //   multiSelectKeys: 'shiftKey',
-      multiSelectMode: true,
-      callback: this.getSelected
-    })
+    setTimeout(() => {
+      this.ds = new DragSelect({
+        selectables: document.querySelectorAll('[data-valid-time="true"]'),
+        area: document.querySelector('.draggable'),
+        //   multiSelectKeys: 'shiftKey',
+        multiSelectMode: true,
+        callback: this.getSelected
+      })
+    }, 500)
   },
   methods: {
     reset() {
@@ -239,7 +259,7 @@ export default {
 <style lang="scss">
 .legend {
   &.days {
-    padding-right: 17px;
+    padding-right: 0;
   }
   &.time {
     span,
