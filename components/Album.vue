@@ -1,11 +1,12 @@
 <template lang="pug">
   section(:class="type")
-    carousel(v-if="type=='carousel'" loop autoplay :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="type==='hero'?[[760, 2] , [960, 3], [1080, 4]]:[]")
-      slide(v-for='(slide, i) in slides', :key='i')
-        v-card
-          v-img(aspect-ratio="1.77" :src="slide.image")
-          .caption.full-width.abs.right.bottom.px-5.text-right(v-if="slide.caption")
-            span.text-shadow(v-html="$md.render(slide.caption)")
+    client-only
+      carousel(v-if="type=='carousel'" loop autoplay :scroll-per-page="false" :autoplay-timeout="5000" :per-page="1" autoplay-hover-pause v-model="active" :perPageCustom="type==='hero'?[[760, 2] , [960, 3], [1080, 4]]:[]")
+        slide(v-for='(slide, i) in slides', :key='i')
+          v-card
+            v-img(aspect-ratio="1.77" :src="slide.image")
+            .caption.full-width.abs.right.bottom.px-5.text-right(v-if="slide.caption")
+              span.text-shadow(v-html="$md.render(slide.caption)")
 </template>
 
 <script>
