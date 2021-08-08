@@ -37,7 +37,7 @@ import {
   addDays,
   format,
   min,
-  max
+  max,
 } from 'date-fns'
 export default {
   name: 'Scheduler',
@@ -45,28 +45,28 @@ export default {
   props: {
     calStart: {
       type: String,
-      default: format(new Date(), 'yyyy-MM-dd')
+      default: format(new Date(), 'yyyy-MM-dd'),
     },
     calEnd: {
       type: String,
-      default: format(addDays(new Date(), 7), 'yyyy-MM-dd')
+      default: format(addDays(new Date(), 7), 'yyyy-MM-dd'),
     },
     dayStart: {
       type: String,
-      default: '07:00'
+      default: '07:00',
     },
     dayEnd: {
       type: String,
-      default: '17:00'
+      default: '17:00',
     },
     days: {
       type: Number,
-      default: 7
+      default: 7,
     },
     isoStart: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
   },
   data() {
     return {
@@ -74,7 +74,7 @@ export default {
       ds: null,
       slotMins: 30, // how many minutes each slot should contain
       today: format(new Date(), 'yyyy-MM-dd'),
-      daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     }
   },
   computed: {
@@ -89,7 +89,7 @@ export default {
           getTime(new Date(this.today + 'T' + this.dayStart))) /
         3600000
       return hours * i
-    }
+    },
   },
   mounted() {
     /* eslint-disable no-undef */
@@ -99,8 +99,8 @@ export default {
         area: document.querySelector('.draggable'),
         //   multiSelectKeys: 'shiftKey',
         multiSelectMode: true,
-        callback: this.getSelected
       })
+      this.ds.subscribe('callback', this.getSelected)
     }, 500)
   },
   methods: {
@@ -121,7 +121,7 @@ export default {
       const start = subMinutes(end, this.slotMins)
       return {
         start: format(start, hours),
-        end: format(end, hours)
+        end: format(end, hours),
       }
     },
     formatTime(time, timeFormat) {
@@ -151,13 +151,13 @@ export default {
       const arr = e.map((x) => ({
         start: x.dataset.start,
         end: x.dataset.end,
-        date: x.dataset.day
+        date: x.dataset.day,
       }))
       const that = this
       const data = this.groupBy(arr, 'date')
       this.selected = this.dateSort(
         Object.keys(data).map((key) => ({
-          [key]: that.timeSort(data[key], that.today)
+          [key]: that.timeSort(data[key], that.today),
         }))
       )
       this.$emit('change', this.selected)
@@ -178,31 +178,31 @@ export default {
       return areIntervalsOverlapping(
         {
           start: new Date(this.today + 'T' + int2.start),
-          end: new Date(this.today + 'T' + int2.end)
+          end: new Date(this.today + 'T' + int2.end),
         },
         {
           start: new Date(this.today + 'T' + int1.start),
-          end: new Date(this.today + 'T' + int1.end)
+          end: new Date(this.today + 'T' + int1.end),
         },
         { inclusive: true }
       )
     },
     dateSort: (arr) =>
-      arr.sort(function(a, b) {
+      arr.sort(function (a, b) {
         return compareAsc(
           new Date(Object.keys(a)[0] + 'T00:00'),
           new Date(Object.keys(b)[0] + 'T00:00')
         )
       }),
     timeSort: (arr, date) =>
-      arr.sort(function(a, b) {
+      arr.sort(function (a, b) {
         return compareAsc(
           new Date(date + 'T' + a.start),
           new Date(date + 'T' + b.start)
         )
       }),
     groupBy(objectArray, property) {
-      const newObj = objectArray.reduce(function(acc, obj) {
+      const newObj = objectArray.reduce(function (acc, obj) {
         const key = obj[property]
         if (!acc[key]) {
           acc[key] = []
@@ -225,11 +225,11 @@ export default {
           isSibling = areIntervalsOverlapping(
             {
               start: currStart,
-              end: currEnd
+              end: currEnd,
             },
             {
               start: itemStart,
-              end: itemEnd
+              end: itemEnd,
             },
             { inclusive: true }
           )
@@ -237,7 +237,7 @@ export default {
           return isSibling
             ? {
                 start: format(min(times), 'HH:mm'),
-                end: format(max(times), 'HH:mm')
+                end: format(max(times), 'HH:mm'),
               }
             : itemInterval
         })
@@ -251,8 +251,8 @@ export default {
         }
       }, [])
       return newArr
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -293,10 +293,18 @@ export default {
       &::before {
         background: rgba(white, 1);
       }
+      &.valid::before {
+        background: rgba($quadrary, 1);
+      }
     }
     .theme--light & {
       &::before {
-        background: rgba(black, 0.87);
+        background: rgba(0, 0, 0, 0.87);
+      }
+      &.ds-selected {
+      }
+      &.valid::before {
+        background: rgba($quadrary, 0.87);
       }
     }
     &::before {
