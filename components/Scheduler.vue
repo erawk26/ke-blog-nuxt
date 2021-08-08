@@ -100,7 +100,7 @@ export default {
         //   multiSelectKeys: 'shiftKey',
         multiSelectMode: true,
       })
-      this.ds.subscribe('callback', this.getSelected)
+      this.ds.subscribe('callback', ({items})=>this.getSelected(items))
     }, 500)
   },
   methods: {
