@@ -18,7 +18,7 @@ export default {
       }
     ],
     script: [
-      { src: 'https://thibaultjanbeyer.github.io/DragSelect/ds.min.js' }
+      { src: 'https://cdn.jsdelivr.net/npm/dragselect@2.2.2/dist/DragSelect.min.js' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
