@@ -112,8 +112,11 @@ export const actions = {
       false,
       /\.json$/
     )
+    const clientSchedules = await this.$axios.$get('/dev/schedules')
+
     commit('setPages', getFiles(files1))
     commit('setNewsPosts', getFiles(files2))
     commit('setAlbums', getFiles(files3))
+    commit('SET_STATE', { key: 'clientSchedules', data: clientSchedules })
   }
 }
