@@ -1,9 +1,12 @@
 export default {
-  mode: 'universal',
+  target: 'static',
   /*
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -27,7 +30,6 @@ export default {
     ]
   },
   loading: { color: '#fff' },
-  css: [],
   plugins: [
     '~/plugins/globalMethods.js',
     { src: '~/plugins/vueCarousel.js', ssr: false }
@@ -74,6 +76,11 @@ export default {
     }
   },
   build: {
-    extend(config, ctx) {}
+    babel: {
+      plugins: [
+        '@babel/plugin-proposal-class-properties',
+        '@babel/plugin-proposal-private-methods'
+      ]
+    }
   }
 }
